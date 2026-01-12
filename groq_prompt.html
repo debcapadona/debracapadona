@@ -1,0 +1,335 @@
+<!-- groq_prompt.html (REV3: breadcrumbs reflect LEFT NAV hierarchy) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Groq Prompt (Example) — Debra Capadona</title>
+  <style>
+    :root{
+      --bg:#f5f7fa;
+      --ink:#2c3e50;
+      --muted:#6c7a8f;
+      --panel:#ffffff;
+      --sidebar:#1a1d29;
+      --sidebar2:#2a2f3f;
+      --accent1:#4facfe;
+      --accent2:#00f2fe;
+      --codebg:#0f172a;
+      --codeink:#e5e7eb;
+      --shadow:0 2px 8px rgba(0,0,0,.05);
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.35;color:var(--ink);background:var(--bg)}
+    .app-container{display:flex;min-height:100vh}
+
+    /* Sidebar */
+    .sidebar{width:280px;background:var(--sidebar);color:#fff;padding:18px 16px;position:fixed;height:100vh;overflow-y:auto}
+    .sidebar-header{margin-bottom:14px}
+    .sidebar-header h1{font-size:1.15em;margin-bottom:6px;color:var(--accent1)}
+    .sidebar-header .tagline{font-size:.78em;color:#a8b2c1;line-height:1.25}
+    .nav-section{margin-bottom:14px}
+    .nav-section-title{font-size:.68em;text-transform:uppercase;letter-spacing:1px;color:#6c7a8f;margin-bottom:8px;font-weight:600}
+    .nav-item{padding:9px 12px;margin-bottom:4px;border-radius:6px;cursor:pointer;transition:all .3s;font-size:.88em;display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+    .nav-item:hover{background:#252938}
+    .nav-item.active{background:linear-gradient(135deg,var(--accent1) 0%,var(--accent2) 100%);color:#fff}
+    .nav-icon{font-size:1.05em}
+
+    /* Main */
+    .main-content{margin-left:280px;flex:1;padding:0}
+
+    /* Hero with color pop */
+    .hero{
+      background:linear-gradient(135deg,var(--sidebar) 0%,var(--sidebar2) 70%);
+      color:#fff;
+      padding:18px 22px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:14px;
+      border-bottom:1px solid rgba(255,255,255,0.06);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:-40px -60px auto auto;
+      width:220px;
+      height:220px;
+      background:radial-gradient(circle at 30% 30%, rgba(79,172,254,.55), rgba(0,242,254,0) 60%);
+      pointer-events:none;
+      transform:rotate(20deg);
+    }
+    .hero:after{
+      content:"";
+      position:absolute;
+      inset:auto -80px -80px auto;
+      width:260px;
+      height:260px;
+      background:radial-gradient(circle at 30% 30%, rgba(0,242,254,.35), rgba(0,242,254,0) 62%);
+      pointer-events:none;
+      transform:rotate(-15deg);
+    }
+    .hero-left{position:relative;z-index:1}
+    .hero-left h2{font-size:1.45em;margin-bottom:6px;color:#fff}
+    .hero-left p{color:#a8b2c1;font-size:.92em;margin:0}
+
+    /* Groq badge */
+    .groq-badge{
+      position:relative;
+      z-index:1;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.10);
+      border-radius:999px;
+      padding:8px 10px;
+      white-space:nowrap;
+      box-shadow:0 6px 18px rgba(0,0,0,.18);
+    }
+    .groq-mark{
+      width:30px;height:30px;border-radius:10px;
+      background:linear-gradient(135deg,var(--accent1) 0%,var(--accent2) 100%);
+      display:grid;place-items:center;
+      color:#071022;font-weight:900;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      box-shadow:0 6px 18px rgba(0,0,0,.25);
+    }
+    .groq-badge .txt{display:flex;flex-direction:column;line-height:1.05}
+    .groq-badge .txt .top{font-weight:800;font-size:.88em;color:#fff}
+    .groq-badge .txt .sub{font-size:.75em;color:#a8b2c1}
+
+    /* Breadcrumbs (UPDATED) */
+    .breadcrumbs{
+      padding:8px 22px;
+      background:#fff;
+      border-bottom:1px solid #e9ecef;
+      font-size:.86em;
+      color:var(--muted);
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:6px;
+    }
+    .breadcrumbs a{color:var(--accent1);text-decoration:none;cursor:pointer;transition:color .3s}
+    .breadcrumbs a:hover{color:var(--accent2);text-decoration:underline}
+    .breadcrumbs .separator{color:#d1d8e0;margin:0 2px}
+    .breadcrumbs .group{
+      color:#46566a;
+      font-weight:700;
+    }
+    .breadcrumbs .current{color:var(--ink);font-weight:700}
+
+    .content{padding:14px 22px}
+
+    .viz-container{
+      background:var(--panel);
+      padding:12px 14px;
+      border-radius:10px;
+      box-shadow:var(--shadow);
+      margin-bottom:10px;
+    }
+
+    .header-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:10px;
+      padding-bottom:10px;
+      border-bottom:1px solid #eef2f7;
+    }
+    .subtle{color:var(--muted);line-height:1.25;font-size:.9em;margin:0}
+
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{
+      font-size:.78em;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid #e9ecef;
+      background:linear-gradient(135deg, rgba(79,172,254,.12), rgba(0,242,254,.08));
+      color:#1a1d29;
+      white-space:nowrap;
+    }
+    .chip span{opacity:.75}
+
+    .prompt-container{
+      padding:2px;
+      border-radius:12px;
+      background:linear-gradient(135deg, rgba(79,172,254,.85), rgba(0,242,254,.75));
+      box-shadow:0 10px 26px rgba(79,172,254,.16);
+    }
+    .prompt-inner{
+      background:var(--panel);
+      border-radius:10px;
+      padding:10px;
+      position:relative;
+    }
+
+    .code{
+      background:var(--codebg);
+      color:var(--codeink);
+      border-radius:10px;
+      padding:14px;
+      overflow:auto;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      font-size:.88em;
+      line-height:1.45;
+      white-space:pre-wrap;
+      word-break:break-word;
+      overflow-wrap:anywhere;
+    }
+
+    .btn{
+      position:absolute;top:10px;right:10px;
+      background:linear-gradient(135deg,var(--accent1) 0%,var(--accent2) 100%);
+      color:#071022;border:none;border-radius:10px;
+      padding:7px 10px;font-weight:900;font-size:.82em;cursor:pointer;
+      box-shadow:0 6px 16px rgba(0,0,0,.18);
+    }
+    .btn:active{transform:translateY(1px)}
+
+    @media(max-width:1024px){
+      .sidebar{width:100%;position:relative;height:auto}
+      .main-content{margin-left:0}
+      .app-container{flex-direction:column}
+      .content{padding:14px}
+      .breadcrumbs{padding:8px 14px}
+      .hero{padding:16px 14px;flex-direction:column;align-items:flex-start}
+      .btn{position:static;margin-bottom:10px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-container">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h1>DebraCapadona.com</h1>
+        <p class="tagline">GenAI + systems delivery demonstration — how an end-to-end linguistic analysis platform was designed, built, and iterated.</p>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Start</div>
+        <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span><span>DebraCapadona.com</span></a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">GenAI & Prompting</div>
+        <a class="nav-item" href="genai_force_multiplier.html"><span class="nav-icon">🧠</span><span>GenAI as Force Multiplier</span></a>
+        <a class="nav-item" href="prompt_style.html"><span class="nav-icon">✍️</span><span>Prompt Style & Patterns</span></a>
+        <a class="nav-item active" href="groq_prompt.html"><span class="nav-icon">🧾</span><span>Groq Prompt (Example)</span></a>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="hero">
+        <div class="hero-left">
+          <h2>Groq Prompt (Example)</h2>
+          <p>Strict definitions + strict JSON output contract.</p>
+        </div>
+
+        <div class="groq-badge" title="Groq prompt example">
+          <div class="groq-mark">G</div>
+          <div class="txt">
+            <div class="top">Groq</div>
+            <div class="sub">Prompt artifact</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UPDATED BREADCRUMBS: Index › GenAI & Prompting › Groq Prompt (Example) -->
+      <div class="breadcrumbs" aria-label="breadcrumbs">
+        <a href="index.html">Index</a>
+        <span class="separator">›</span>
+        <span class="group">GenAI &amp; Prompting</span>
+        <span class="separator">›</span>
+        <span class="current">Groq Prompt (Example)</span>
+      </div>
+
+      <div class="content">
+        <div class="viz-container">
+          <div class="header-row">
+            <p class="subtle"><strong style="color:#1a1d29;">Copy/paste exactly as used.</strong> Single artifact. No edits.</p>
+            <div class="chips" aria-label="dimensions">
+              <div class="chip"><span>01</span> Temporal</div>
+              <div class="chip"><span>02</span> Certainty</div>
+              <div class="chip"><span>03</span> Valence</div>
+              <div class="chip"><span>04</span> Agency</div>
+              <div class="chip"><span>05</span> Meme</div>
+              <div class="chip"><span>06</span> Metaphor</div>
+              <div class="chip"><span>07</span> Pronouns</div>
+              <div class="chip"><span>08</span> Sacred</div>
+              <div class="chip"><span>09</span> Time</div>
+            </div>
+          </div>
+          <p class="subtle">Output is JSON-only for reliable parsing and pipeline use.</p>
+        </div>
+
+        <div class="prompt-container">
+          <div class="prompt-inner">
+            <button class="btn" id="copyBtn" type="button">Copy</button>
+            <div class="code" id="promptText">You are a precise linguistic analyst tasked with evaluating a given text sample for anomalous narrative shifts across specific dimensions. For each dimension, provide a score based on the evidence in the text. Use the following definitions:
+
+1. Temporal Bleed: Measures how much future events are described as if they've already occurred or are leaking into past/present tense.
+
+2. Certainty Collapse: Measures shift from hedging/uncertainty to definitive statements. High score = strong certainty.
+
+3. Emotional Valence: Overall emotional charge. 0 = strongly negative, 0.5 = neutral, 1 = strongly positive.
+
+4. Agency Reversal: Power dynamics shifting from passive/victim to active/empowered language.
+
+5. Novel Meme: Unusual phrasing, neologisms, or emergent slang that feels prophetic or charged.
+
+6. Metaphor Density: Heavy use of metaphorical/symbolic language vs literal description.
+
+7. Pronoun Collective: Collective vs individual framing. 0 = individual, 1 = collective.
+
+8. Sacred/Profane: Religious, spiritual, or blasphemous language appearing in secular context.
+
+9. Time Compression: Subjective time distortion - time speeding up, slowing down, or feeling warped.
+
+Text: "{text}"
+
+Return JSON only, no explanation:
+{"temporal_bleed": 0.0, "certainty_collapse": 0.0, "emotional_valence": 0.5, "agency_reversal": 0.0, "novel_meme": 0.0, "metaphor_density": 0.0, "pronoun_collective": 0.0, "sacred_profane": 0.0, "time_compression": 0.0}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const btn = document.getElementById('copyBtn');
+      const text = document.getElementById('promptText');
+
+      async function copyPrompt() {
+        const value = text.innerText;
+        try {
+          await navigator.clipboard.writeText(value);
+          const old = btn.innerText;
+          btn.innerText = 'Copied ✓';
+          setTimeout(() => (btn.innerText = old), 900);
+        } catch (e) {
+          const range = document.createRange();
+          range.selectNodeContents(text);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          document.execCommand('copy');
+          sel.removeAllRanges();
+          const old = btn.innerText;
+          btn.innerText = 'Copied ✓';
+          setTimeout(() => (btn.innerText = old), 900);
+        }
+      }
+
+      btn.addEventListener('click', copyPrompt);
+    })();
+  </script>
+</body>
+</html>

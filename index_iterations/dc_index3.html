@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DebraCapadona.com — Executive TPM Profile</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+
+    :root{
+      --bg:#f5f7fa;
+      --ink:#141824;
+      --muted:#6c7a8f;
+      --panel:#ffffff;
+      --line:#e9ecef;
+
+      --sidebar:#0f172a;
+      --sidebar2:#111b35;
+
+      --accent1:#7c3aed; /* purple */
+      --accent2:#06b6d4; /* cyan */
+      --accent3:#f97316; /* orange */
+
+      --shadow:0 10px 30px rgba(15,23,42,0.10);
+      --shadow2:0 2px 10px rgba(0,0,0,0.06);
+      --radius:18px;
+    }
+
+    body{
+      font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+      line-height:1.45;
+      color:var(--ink);
+      background:var(--bg);
+    }
+
+    .app{display:flex;min-height:100vh}
+
+    /* Sidebar */
+    .sidebar{
+      width:290px;
+      background:linear-gradient(180deg,var(--sidebar) 0%, var(--sidebar2) 100%);
+      color:#fff;
+      padding:22px 18px;
+      position:fixed;
+      height:100vh;
+      overflow-y:auto;
+      border-right:1px solid rgba(255,255,255,0.08);
+    }
+
+    .brand{
+      padding:14px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.10);
+      background:rgba(255,255,255,0.04);
+      box-shadow:0 10px 20px rgba(0,0,0,0.12);
+      margin-bottom:14px;
+    }
+    .brand h1{
+      font-size:1.05em;
+      letter-spacing:0.2px;
+      margin-bottom:6px;
+      background:linear-gradient(135deg,var(--accent2),#a78bfa);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      font-weight:900;
+    }
+    .brand p{
+      font-size:0.82em;
+      color:#cbd5e1;
+      line-height:1.35;
+    }
+
+    .nav-title{
+      font-size:0.7em;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      color:#94a3b8;
+      margin:14px 0 10px;
+      font-weight:800;
+    }
+
+    .nav a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      margin-bottom:8px;
+      border-radius:12px;
+      text-decoration:none;
+      color:#e5e7eb;
+      border:1px solid rgba(255,255,255,0.06);
+      background:rgba(255,255,255,0.03);
+      transition:all .2s ease;
+      font-size:0.92em;
+    }
+    .nav a:hover{
+      transform:translateY(-2px);
+      border-color:rgba(255,255,255,0.14);
+      background:rgba(255,255,255,0.06);
+    }
+
+    .mini-proof{
+      margin-top:12px;
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.10);
+      background:
+        linear-gradient(135deg, rgba(124,58,237,0.18) 0%, rgba(6,182,212,0.12) 55%, rgba(249,115,22,0.10) 100%),
+        rgba(255,255,255,0.04);
+      box-shadow:0 12px 30px rgba(0,0,0,0.14);
+    }
+    .mini-proof .k{
+      font-size:0.72em;
+      letter-spacing:0.8px;
+      text-transform:uppercase;
+      color:#cbd5e1;
+      margin-bottom:8px;
+      font-weight:900;
+    }
+    .mini-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+    .mini{
+      padding:10px 10px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.10);
+      background:rgba(15,23,42,0.30);
+      text-align:center;
+    }
+    .mini .val{
+      font-weight:900;
+      font-size:1.05em;
+      background:linear-gradient(135deg,#93c5fd,#a78bfa,#22d3ee);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      margin-bottom:2px;
+    }
+    .mini .lbl{
+      font-size:0.68em;
+      color:#cbd5e1;
+      line-height:1.15;
+    }
+
+    .side-links{
+      margin-top:12px;
+    }
+    .side-links a{
+      display:block;
+      text-decoration:none;
+      color:#e5e7eb;
+      padding:9px 10px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.06);
+      background:rgba(255,255,255,0.03);
+      transition:all .2s ease;
+      font-size:0.90em;
+      margin-bottom:8px;
+    }
+    .side-links a:hover{
+      transform:translateY(-2px);
+      border-color:rgba(255,255,255,0.14);
+      background:rgba(255,255,255,0.06);
+    }
+
+    /* Main */
+    .main{
+      margin-left:290px;
+      flex:1;
+      min-width:0;
+    }
+
+    /* Hero */
+    .hero{
+      padding:44px 44px 28px;
+      color:#fff;
+      background:
+        radial-gradient(1200px 500px at 20% 10%, rgba(124,58,237,0.35) 0%, rgba(124,58,237,0.0) 55%),
+        radial-gradient(900px 420px at 75% 0%, rgba(6,182,212,0.30) 0%, rgba(6,182,212,0.0) 60%),
+        radial-gradient(900px 520px at 60% 120%, rgba(249,115,22,0.18) 0%, rgba(249,115,22,0.0) 55%),
+        linear-gradient(135deg,var(--sidebar) 0%, var(--sidebar2) 100%);
+      border-bottom:1px solid rgba(0,0,0,0.06);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero h2{
+      font-size:2.15em;
+      margin-bottom:8px;
+      letter-spacing:0.2px;
+      font-weight:950;
+    }
+    .hero .subtitle{
+      color:#d1d5db;
+      font-size:1.03em;
+      max-width:980px;
+      line-height:1.55;
+    }
+
+    .hero-badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
+      align-items:center;
+    }
+    .chip{
+      font-size:0.85em;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.14);
+      background:rgba(255,255,255,0.06);
+      color:#fff;
+      font-weight:800;
+      backdrop-filter: blur(6px);
+    }
+    .chip.hot{
+      border:none;
+      color:#0b1220;
+      background:linear-gradient(135deg,var(--accent2),#a78bfa);
+    }
+
+    .hero-cta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:18px;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:14px;
+      font-weight:900;
+      font-size:0.95em;
+      text-decoration:none;
+      border:1px solid rgba(255,255,255,0.14);
+      color:#fff;
+      background:rgba(255,255,255,0.06);
+      transition:all .2s ease;
+      backdrop-filter: blur(6px);
+    }
+    .btn:hover{
+      transform:translateY(-2px);
+      background:rgba(255,255,255,0.10);
+    }
+    .btn.primary{
+      border:none;
+      color:#0b1220;
+      background:linear-gradient(135deg,var(--accent2),#a78bfa);
+      box-shadow:0 12px 30px rgba(6,182,212,0.18);
+    }
+    .btn.primary:hover{ filter:brightness(1.03); }
+    .btn.ghost{
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(15,23,42,0.10);
+    }
+
+    .container{
+      padding:28px 44px 44px;
+      max-width:1140px;
+    }
+
+    /* Cards / layout */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:16px;
+    }
+    .span-12{grid-column:span 12;}
+    .span-8{grid-column:span 8;}
+    .span-7{grid-column:span 7;}
+    .span-6{grid-column:span 6;}
+    .span-5{grid-column:span 5;}
+    .span-4{grid-column:span 4;}
+
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow2);
+      padding:18px;
+    }
+
+    h3{
+      font-size:1.2em;
+      margin-bottom:10px;
+      color:#0b1220;
+      letter-spacing:0.2px;
+      font-weight:950;
+    }
+    .muted{color:var(--muted);}
+    .lead{font-size:1.03em; line-height:1.65;}
+    .tiny{font-size:0.92em;}
+
+    .section-anchor{ scroll-margin-top:18px; }
+
+    /* Feature rows */
+    .rows{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+    .row{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:#fff;
+    }
+    .row .icon{
+      width:34px;height:34px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      color:#0b1220;
+      background:
+        linear-gradient(135deg, rgba(124,58,237,0.20), rgba(6,182,212,0.16));
+      border:1px solid rgba(124,58,237,0.18);
+      flex:0 0 34px;
+    }
+    .row b{color:#0b1220;}
+    .row span{color:var(--muted);}
+
+    /* Proof panel (fast path to evidence) */
+    .proof-panel{
+      border-radius:var(--radius);
+      padding:18px;
+      border:1px solid rgba(124,58,237,0.18);
+      background:
+        linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(6,182,212,0.07) 55%, rgba(249,115,22,0.05) 100%),
+        #ffffff;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .proof-panel::after{
+      content:"";
+      position:absolute;
+      right:-120px;
+      top:-160px;
+      width:340px;height:340px;
+      border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, rgba(6,182,212,0.35), rgba(124,58,237,0.0) 60%);
+      filter:blur(0px);
+      opacity:0.9;
+      pointer-events:none;
+    }
+
+    .proof-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+    .btn-dark{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:14px;
+      font-weight:900;
+      font-size:0.95em;
+      text-decoration:none;
+      color:#0b1220;
+      border:1px solid rgba(15,23,42,0.10);
+      background:linear-gradient(135deg, rgba(6,182,212,0.16), rgba(124,58,237,0.14));
+      transition:all .2s ease;
+    }
+    .btn-dark:hover{
+      transform:translateY(-2px);
+      filter:brightness(1.02);
+    }
+    .btn-outline{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:14px;
+      font-weight:900;
+      font-size:0.95em;
+      text-decoration:none;
+      color:#0b1220;
+      border:1px solid rgba(15,23,42,0.14);
+      background:#fff;
+      transition:all .2s ease;
+    }
+    .btn-outline:hover{
+      transform:translateY(-2px);
+      background:#f8fafc;
+    }
+
+    /* Sticky Evidence CTA */
+    .sticky-evidence{
+      position:fixed;
+      bottom:18px;
+      right:22px;
+      z-index:1000;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .sticky-evidence a{
+      text-decoration:none;
+      font-weight:950;
+      padding:11px 14px;
+      border-radius:999px;
+      color:#0b1220;
+      background:linear-gradient(135deg,var(--accent2),#a78bfa);
+      box-shadow:0 16px 35px rgba(124,58,237,0.20);
+      border:1px solid rgba(255,255,255,0.18);
+      transition:all .2s ease;
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+    }
+    .sticky-evidence a:hover{ transform:translateY(-2px); filter:brightness(1.03); }
+    .sticky-evidence .small{
+      display:none;
+      font-size:0.86em;
+      padding:10px 12px;
+      background:#0b1220;
+      color:#fff;
+      border:1px solid rgba(255,255,255,0.16);
+      box-shadow:0 16px 35px rgba(0,0,0,0.18);
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 1024px){
+      .sidebar{position:relative;width:100%;height:auto}
+      .main{margin-left:0}
+      .app{flex-direction:column}
+      .container{padding:22px 18px 40px}
+      .hero{padding:28px 18px}
+      .sticky-evidence{ right:14px; bottom:14px; }
+      .sticky-evidence .small{ display:inline-flex; }
+    }
+    @media (max-width: 900px){
+      .grid{grid-template-columns:repeat(1,1fr)}
+      .span-12,.span-8,.span-7,.span-6,.span-5,.span-4{grid-column:span 12;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <h1>DebraCapadona.com</h1>
+        <p>
+          Executive-facing delivery profile with a working artifact: an AI-enabled system shipped with governance,
+          constraints, and repeatable execution.
+        </p>
+      </div>
+
+      <div class="nav-title">Fast paths</div>
+      <nav class="nav">
+        <a href="https://edgeconditionanalysis.com" target="_blank" rel="noopener">🔗 System Evidence (Live)</a>
+        <a href="https://edgeconditionanalysis.com/resume.html" target="_blank" rel="noopener">📄 Resume</a>
+        <a href="#proof">⚡ Working System Overview</a>
+      </nav>
+
+      <div class="mini-proof" aria-label="Proof metrics">
+        <div class="k">Snapshot</div>
+        <div class="mini-grid">
+          <div class="mini">
+            <div class="val">~200K</div>
+            <div class="lbl">Public discussions<br/>processed</div>
+          </div>
+          <div class="mini">
+            <div class="val">9</div>
+            <div class="lbl">Linguistic<br/>dimensions</div>
+          </div>
+          <div class="mini">
+            <div class="val">3-tier</div>
+            <div class="lbl">Pipeline<br/>architecture</div>
+          </div>
+          <div class="mini">
+            <div class="val">MVP</div>
+            <div class="lbl">Bounded scope<br/>by design</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-title">On this page</div>
+      <nav class="nav">
+        <a href="#profile">👤 Profile</a>
+        <a href="#operating-model">🧭 Operating Model</a>
+        <a href="#system">🤖 System Build</a>
+        <a href="#evidence">🧾 Evidence</a>
+      </nav>
+
+      <div class="nav-title">Connect</div>
+      <div class="side-links">
+        <a href="https://www.linkedin.com/in/debcapadona/" target="_blank" rel="noopener">💼 LinkedIn</a>
+        <a href="https://github.com/debcapadona/predictive_linguistics_analysis" target="_blank" rel="noopener">💻 GitHub</a>
+        <!-- TODO: replace or remove -->
+        <a href="mailto:debra.capadona@example.com">✉️ Email</a>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <header class="hero">
+        <h2>Debra Capadona</h2>
+        <p class="subtitle">
+          Senior TPM / program delivery leader for complex, regulated environments — focused on judgment, composure,
+          and shipping systems that hold up under scrutiny.
+        </p>
+
+        <div class="hero-badges">
+          <span class="chip hot">Evidence-first</span>
+          <span class="chip">Governed delivery</span>
+          <span class="chip">Ambiguity → plan</span>
+          <span class="chip">Controlled iterations</span>
+          <span class="chip">Risk-managed execution</span>
+        </div>
+
+        <!-- Evidence reachable immediately -->
+        <div class="hero-cta">
+          <a class="btn primary" href="https://edgeconditionanalysis.com" target="_blank" rel="noopener">
+            🔗 View System Evidence (Live)
+          </a>
+          <a class="btn ghost" href="#proof">⚡ Working System Overview</a>
+          <a class="btn" href="https://edgeconditionanalysis.com/resume.html" target="_blank" rel="noopener">📄 Resume</a>
+        </div>
+      </header>
+
+      <div class="container">
+
+        <!-- PROOF IN 30 SECONDS (high up) -->
+        <section id="proof" class="proof-panel section-anchor" style="margin-bottom:16px;">
+          <h3 style="margin-bottom:8px;">Working System Overview</h3>
+          <p class="muted" style="line-height:1.6;">
+            To demonstrate how I use AI as a force multiplier, I selected a moderately complex, real-world use case and built a complete, end-to-end system.
+            The goal was not novelty, but execution: clear architecture, disciplined data handling, and prompt design that produces reliable, repeatable outputs.
+          </p>
+
+          <div class="proof-actions">
+            <a class="btn-dark" href="https://edgeconditionanalysis.com" target="_blank" rel="noopener">
+              🔗 Open the live system evidence
+            </a>
+            <a class="btn-outline" href="https://edgeconditionanalysis.com/resume.html" target="_blank" rel="noopener">
+              📄 Open resume
+            </a>
+            <a class="btn-outline" href="#system">🤖 How the system was built</a>
+          </div>
+
+          <p class="tiny muted" style="margin-top:10px;">
+            If you only have a minute: open the system, scan the outputs, then come back for the operating model.
+          </p>
+        </section>
+
+        <!-- Profile + Operating Model (less "me me me", more reference to experience/resume) -->
+        <div class="grid" style="margin-bottom:16px;">
+          <section id="profile" class="card section-anchor span-7">
+            <h3>Executive Profile</h3>
+            <p class="lead muted">
+              This profile summarizes delivery posture and leadership approach; detailed experience, roles, and timeline are in the resume.
+              The goal here is simple: make it easy to evaluate judgment, operating model, and evidence.
+            </p>
+
+            <div class="rows">
+              <div class="row">
+                <div class="icon">⚖️</div>
+                <div>
+                  <b>Regulated, high-stakes delivery</b>
+                  <span> — programs where correctness, controls, and auditability matter as much as speed.</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="icon">🧠</div>
+                <div>
+                  <b>Sound judgment under uncertainty</b>
+                  <span> — decisions made with explicit tradeoffs, crisp scope, and clear accountability.</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="icon">🧊</div>
+                <div>
+                  <b>Composed, low-drama execution</b>
+                  <span> — calm operational tempo even when the work is messy and the stakes are real.</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:12px;">
+              <a class="btn-outline" href="https://edgeconditionanalysis.com/resume.html" target="_blank" rel="noopener">
+                📄 Resume (experience + timeline)
+              </a>
+            </div>
+          </section>
+
+          <section id="operating-model" class="card section-anchor span-5">
+            <h3>Operating Model</h3>
+            <p class="muted" style="line-height:1.6;">
+              A repeatable approach for complex delivery — designed to avoid “confidently wrong” outcomes.
+            </p>
+
+            <div class="rows">
+              <div class="row">
+                <div class="icon">🧩</div>
+                <div>
+                  <b>Decompose</b>
+                  <span> — define boundaries, contracts, checkpoints, and what “done” means.</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="icon">🧱</div>
+                <div>
+                  <b>Architect</b>
+                  <span> — stable core, modular adapters, controlled extensibility.</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="icon">🔁</div>
+                <div>
+                  <b>Iterate</b>
+                  <span> — bounded MVP, validate, then expand deliberately.</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:12px;">
+              <a class="btn-dark" href="https://edgeconditionanalysis.com" target="_blank" rel="noopener">
+                🔗 Evidence: live system
+              </a>
+            </div>
+          </section>
+        </div>
+
+        <!-- System Build -->
+        <section id="system" class="card section-anchor" style="margin-bottom:16px;">
+          <h3>How the System Was Built (AI-Enabled, Human-Governed)</h3>
+          <p class="muted" style="line-height:1.6;">
+            The system is an intentionally bounded MVP: repeatable runs, explainable outputs, and explicit constraints.
+            AI accelerates implementation and documentation — decision authority stays human.
+          </p>
+
+          <div class="grid" style="margin-top:12px;">
+            <div class="span-6">
+              <div class="row">
+                <div class="icon">🧭</div>
+                <div>
+                  <b>Role separation</b>
+                  <span> — prompts map to specific functions (synthesis, validation, refactor, documentation).</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="icon">📦</div>
+                <div>
+                  <b>Output contracts</b>
+                  <span> — structured outputs over vibes (schemas, checklists, diffs, baselines).</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="icon">🛡️</div>
+                <div>
+                  <b>Guardrails</b>
+                  <span> — constrain outputs, detect drift, and document in/out-of-scope boundaries.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="span-6">
+              <div class="row">
+                <div class="icon">🧪</div>
+                <div>
+                  <b>Verification loops</b>
+                  <span> — edge cases, counterexamples, and “what breaks?” checks are first-class.</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="icon">🏗️</div>
+                <div>
+                  <b>3-tier architecture</b>
+                  <span> — stable core + adapters, built to extend without rewriting foundations.</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="icon">📚</div>
+                <div>
+                  <b>Traceable decisions</b>
+                  <span> — tradeoffs recorded so the system remains explainable as it evolves.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="proof-actions" style="margin-top:14px;">
+            <a class="btn-dark" href="https://edgeconditionanalysis.com" target="_blank" rel="noopener">
+              🔗 Open system evidence
+            </a>
+            <a class="btn-outline" href="https://github.com/debcapadona/predictive_linguistics_analysis" target="_blank" rel="noopener">
+              💻 GitHub (reference implementation)
+            </a>
+          </div>
+        </section>
+
+        <!-- Evidence -->
+        <section id="evidence" class="proof-panel section-anchor">
+          <h3 style="margin-bottom:8px;">Evidence</h3>
+          <p class="muted" style="line-height:1.6;">
+            The live system is the working artifact. This page exists to make the method legible:
+            how ambiguity becomes a plan, how risk is managed, and how delivery stays controlled.
+          </p>
+
+          <div class="rows" style="margin-top:12px;">
+            <div class="row">
+              <div class="icon">🧾</div>
+              <div>
+                <b>System</b>
+                <span> — interactive views, corpus processing, and 9-dimension analysis.</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="icon">🧠</div>
+              <div>
+                <b>Method</b>
+                <span> — bounded MVP, explicit constraints, repeatable runs, explainable outputs.</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="icon">🧭</div>
+              <div>
+                <b>Professional record</b>
+                <span> — roles and delivery history are captured in the resume.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="proof-actions" style="margin-top:14px;">
+            <a class="btn-dark" href="https://edgeconditionanalysis.com" target="_blank" rel="noopener">
+              🔗 Open EdgeConditionAnalysis.com (live evidence)
+            </a>
+            <a class="btn-outline" href="https://edgeconditionanalysis.com/resume.html" target="_blank" rel="noopener">
+              📄 Open resume
+            </a>
+            <a class="btn-outline" href="https://www.linkedin.com/in/debcapadona/" target="_blank" rel="noopener">
+              💼 LinkedIn
+            </a>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Sticky Evidence CTA -->
+      <div class="sticky-evidence" aria-label="Quick evidence access">
+        <a href="https://edgeconditionanalysis.com" target="_blank" rel="noopener">🔗 System Evidence</a>
+        <a class="small" href="#proof">⚡ 30s</a>
+      </div>
+
+    </main>
+  </div>
+</body>
+</html>

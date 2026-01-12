@@ -1,0 +1,145 @@
+<!-- index.html (UPDATED: no "portfolio", external pages only, shorter) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DebraCapadona.com — GenAI Systems Demonstration</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.4;color:#2c3e50;background:#f5f7fa}
+    .app-container{display:flex;min-height:100vh}
+    .sidebar{width:280px;background:#1a1d29;color:#fff;padding:25px 18px;position:fixed;height:100vh;overflow-y:auto}
+    .sidebar-header{margin-bottom:20px}
+    .sidebar-header h1{font-size:1.2em;margin-bottom:6px;color:#4facfe}
+    .sidebar-header .tagline{font-size:.8em;color:#a8b2c1;line-height:1.3}
+    .sidebar-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid #2a2f3f}
+    .sidebar-stat{text-align:center}
+    .sidebar-stat-value{font-size:1.2em;font-weight:700;color:#4facfe}
+    .sidebar-stat-label{font-size:.65em;color:#6c7a8f;margin-top:3px;line-height:1.2}
+    .nav-section{margin-bottom:20px}
+    .nav-section-title{font-size:.7em;text-transform:uppercase;letter-spacing:1px;color:#6c7a8f;margin-bottom:10px;font-weight:600}
+    .nav-item{padding:10px 13px;margin-bottom:4px;border-radius:6px;cursor:pointer;transition:all .3s;font-size:.88em;display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+    .nav-item:hover{background:#252938}
+    .nav-item.active{background:linear-gradient(135deg,#4facfe 0%,#00f2fe 100%);color:#fff}
+    .nav-icon{font-size:1.1em}
+    .main-content{margin-left:280px;flex:1;padding:0}
+    .hero{background:linear-gradient(135deg,#1a1d29 0%,#2a2f3f 100%);color:#fff;padding:40px}
+    .hero h2{font-size:2em;margin-bottom:10px;color:#fff}
+    .hero p{color:#a8b2c1;font-size:1em}
+    .content{padding:40px}
+    .viz-container{background:#fff;padding:25px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);margin-bottom:25px}
+    .lead{color:#2c3e50;line-height:1.7;font-size:1.05em}
+    .subtle{color:#6c7a8f;line-height:1.7;font-size:.95em}
+    .metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-bottom:10px}
+    .metric-card{background:#fff;padding:25px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:4px solid #4facfe;transition:all .3s;cursor:pointer;text-decoration:none;color:inherit}
+    .metric-card:hover{transform:translateY(-5px);box-shadow:0 4px 16px rgba(79,172,254,.2);border-left-width:6px}
+    .metric-card .icon{font-size:2em;margin-bottom:12px}
+    .metric-card .value{font-size:1.2em;font-weight:700;color:#1a1d29;margin-bottom:10px}
+    .metric-card .label{color:#6c7a8f;font-size:.9em;line-height:1.5}
+    .metric-card .cta{margin-top:15px;color:#4facfe;font-weight:600;font-size:.95em}
+    .pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px}
+    .pill{background:#f5f7fa;border:1px solid #e9ecef;color:#2c3e50;padding:8px 10px;border-radius:999px;font-size:.85em}
+    @media(max-width:1024px){.sidebar{width:100%;position:relative;height:auto}.main-content{margin-left:0}.app-container{flex-direction:column}.content{padding:20px}}
+    @media(max-width:768px){.hero{padding:25px 20px}.hero h2{font-size:1.5em}}
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h1>DebraCapadona.com</h1>
+        <p class="tagline">GenAI + systems delivery demonstration — how an end-to-end linguistic analysis platform was designed, built, and iterated.</p>
+      </div>
+
+      <div class="sidebar-stats">
+        <div class="sidebar-stat">
+          <div class="sidebar-stat-value">🗄️ ~200K</div>
+          <div class="sidebar-stat-label">Discussions<br>Ingested</div>
+        </div>
+        <div class="sidebar-stat">
+          <div class="sidebar-stat-value">🧠 9</div>
+          <div class="sidebar-stat-label">Dimensions<br>Scored</div>
+        </div>
+        <div class="sidebar-stat">
+          <div class="sidebar-stat-value">🧱 3-tier</div>
+          <div class="sidebar-stat-label">ETL /<br>Pipeline</div>
+        </div>
+        <div class="sidebar-stat">
+          <div class="sidebar-stat-value">🔁 MVP</div>
+          <div class="sidebar-stat-label">Iterative<br>Design</div>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Start</div>
+        <a class="nav-item active" href="index.html"><span class="nav-icon">🏠</span><span>Index</span></a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">GenAI & Prompting</div>
+        <a class="nav-item" href="genai_force_multiplier.html"><span class="nav-icon">🧠</span><span>GenAI as Force Multiplier</span></a>
+        <a class="nav-item" href="prompt_style.html"><span class="nav-icon">✍️</span><span>Prompt Style & Patterns</span></a>
+        <a class="nav-item" href="groq_prompt.html"><span class="nav-icon">🧾</span><span>Groq Prompt (Example)</span></a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Connect</div>
+        <a href="https://www.linkedin.com/in/debcapadona/" target="_blank" class="nav-item"><span class="nav-icon">💼</span><span>LinkedIn</span></a>
+        <a href="https://github.com/debcapadona/predictive_linguistics_analysis" target="_blank" class="nav-item"><span class="nav-icon">💻</span><span>GitHub</span></a>
+        <!-- Update this email -->
+        <a href="mailto:debra.capadona@example.com" class="nav-item"><span class="nav-icon">✉️</span><span>Email</span></a>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="hero">
+        <h2><a href="resume.html" style="color:white;text-decoration:none;">Debra Capadona</a></h2>
+        <p>Senior Technical Program Manager | GenAI Systems · Data Engineering · ML Platforms</p>
+      </div>
+
+      <div class="content">
+        <div class="viz-container">
+          <p class="lead" style="margin-bottom:6px;">
+            <strong style="color:#1a1d29;">A systems delivery demonstration.</strong>
+            This site documents how I used GenAI (including prompt engineering) as a force multiplier to build a scalable linguistic analysis platform end-to-end.
+          </p>
+          <p class="subtle">
+            The MVP is intentionally scoped: show architecture judgment, pipeline design, scoring strategy, visualization, and iterative refinement under constraints.
+          </p>
+          <div class="pill-row">
+            <div class="pill">GenAI as force multiplier</div>
+            <div class="pill">Prompt engineering</div>
+            <div class="pill">End-to-end delivery</div>
+            <div class="pill">Extensible design</div>
+            <div class="pill">Deliberate trade-offs</div>
+          </div>
+        </div>
+
+        <div class="metrics-grid">
+          <a class="metric-card" href="genai_force_multiplier.html">
+            <div class="icon">🧠</div>
+            <div class="value">GenAI as Force Multiplier</div>
+            <div class="label">Where LLMs accelerated design, implementation, debugging, and iteration—while architecture and judgment stayed human-owned.</div>
+            <div class="cta">→ Open</div>
+          </a>
+
+          <a class="metric-card" href="prompt_style.html">
+            <div class="icon">✍️</div>
+            <div class="value">Prompt Style & Patterns</div>
+            <div class="label">Reusable patterns: constraints, output contracts, evaluation criteria, and iteration loops that produce reliable results.</div>
+            <div class="cta">→ Open</div>
+          </a>
+
+          <a class="metric-card" href="groq_prompt.html">
+            <div class="icon">🧾</div>
+            <div class="value">Groq Prompt (Example)</div>
+            <div class="label">A single full prompt example that shows structure, definitions, and a strict JSON output contract.</div>
+            <div class="cta">→ Open</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

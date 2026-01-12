@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DebraCapadona.com — Senior TPM & Program Delivery</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+
+    :root{
+      --bg:#f6f8ff;
+      --ink:#0f172a;
+      --muted:#5b6b85;
+      --panel:#ffffff;
+      --line:rgba(15,23,42,0.10);
+
+      --sidebar:#0b1020;
+      --sidebar2:#121a33;
+
+      --accent1:#4facfe; /* blue */
+      --accent2:#00f2fe; /* cyan */
+      --accent3:#a78bfa; /* purple */
+      --accent4:#fb7185; /* pink */
+      --accent5:#34d399; /* green */
+
+      --shadow:0 14px 40px rgba(2,6,23,0.10);
+      --shadow2:0 10px 22px rgba(2,6,23,0.10);
+      --radius:18px;
+    }
+
+    body{
+      font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+      line-height:1.45;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 800px at 10% 0%, rgba(79,172,254,0.12), transparent 55%),
+        radial-gradient(1100px 750px at 90% 15%, rgba(167,139,250,0.12), transparent 55%),
+        radial-gradient(900px 650px at 60% 95%, rgba(251,113,133,0.10), transparent 60%),
+        var(--bg);
+    }
+
+    .app{display:flex;min-height:100vh}
+
+    /* Sidebar */
+    .sidebar{
+      width:292px;
+      background:linear-gradient(180deg,var(--sidebar) 0%, var(--sidebar2) 100%);
+      color:#fff;
+      padding:24px 18px;
+      position:fixed;
+      height:100vh;
+      overflow-y:auto;
+      border-right:1px solid rgba(255,255,255,0.06);
+    }
+
+    .brand{ margin-bottom:16px; }
+    .brand h1{
+      font-size:1.12em;
+      margin-bottom:6px;
+      letter-spacing:0.2px;
+      background:linear-gradient(135deg,var(--accent1),var(--accent2),var(--accent3));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      font-weight:950;
+    }
+    .brand p{
+      font-size:0.82em;
+      color:#b7c2d6;
+      line-height:1.35;
+    }
+
+    .side-cta{
+      margin:14px 0 16px;
+      padding:12px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      position:relative;
+      overflow:hidden;
+    }
+    .side-cta::before{
+      content:"";
+      position:absolute;
+      inset:-60px;
+      background:
+        radial-gradient(180px 180px at 20% 30%, rgba(79,172,254,0.20), transparent 60%),
+        radial-gradient(160px 160px at 80% 30%, rgba(167,139,250,0.18), transparent 60%),
+        radial-gradient(160px 160px at 60% 90%, rgba(251,113,133,0.14), transparent 65%);
+      filter:blur(10px);
+      pointer-events:none;
+    }
+
+    .sidebtn{
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:950;
+      font-size:0.90em;
+      border:1px solid rgba(255,255,255,0.14);
+      color:#fff;
+      background:rgba(255,255,255,0.06);
+      transition:transform .18s ease, background .18s ease, filter .18s ease;
+      text-align:center;
+      backdrop-filter: blur(6px);
+    }
+    .sidebtn:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,0.10);
+    }
+    .sidebtn.primary{
+      border:none;
+      color:#071018;
+      background:linear-gradient(135deg,var(--accent1),var(--accent2));
+      box-shadow:0 10px 24px rgba(0,242,254,0.12);
+    }
+    .sidebtn.primary:hover{ filter:brightness(1.02); }
+
+    .proof{
+      margin:0 0 16px;
+      padding:12px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .proof-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+    .proof-item{
+      text-align:center;
+      padding:10px 8px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.06);
+    }
+    .proof-val{
+      font-weight:950;
+      font-size:0.98em;
+      margin-bottom:3px;
+      background:linear-gradient(135deg,var(--accent1),var(--accent3));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .proof-lbl{
+      font-size:0.66em;
+      color:#a8b5cc;
+      line-height:1.2;
+    }
+
+    .nav-title{
+      font-size:0.7em;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      color:#7f90ad;
+      margin:14px 0 10px;
+      font-weight:900;
+    }
+
+    .nav a{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      margin-bottom:6px;
+      border-radius:12px;
+      text-decoration:none;
+      color:#eaf0ff;
+      transition:all .18s ease;
+      border:1px solid transparent;
+      font-size:0.9em;
+    }
+    .nav a:hover{
+      background:rgba(255,255,255,0.07);
+      border-color:rgba(255,255,255,0.08);
+      transform:translateY(-1px);
+    }
+
+    .side-links a{
+      display:block;
+      text-decoration:none;
+      color:#cfe0ff;
+      padding:8px 10px;
+      border-radius:12px;
+      transition:all .18s ease;
+      border:1px solid transparent;
+      font-size:0.88em;
+    }
+    .side-links a:hover{
+      background:rgba(255,255,255,0.07);
+      border-color:rgba(255,255,255,0.08);
+    }
+
+    /* Main */
+    .main{ margin-left:292px; flex:1; }
+
+    .hero{
+      padding:44px 44px 30px;
+      color:#fff;
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(2,6,23,0.08);
+      background:
+        radial-gradient(800px 500px at 10% 20%, rgba(79,172,254,0.25), transparent 55%),
+        radial-gradient(700px 500px at 85% 10%, rgba(167,139,250,0.24), transparent 55%),
+        radial-gradient(700px 520px at 50% 100%, rgba(251,113,133,0.18), transparent 60%),
+        linear-gradient(135deg,var(--sidebar) 0%, var(--sidebar2) 100%);
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:-120px;
+      background:
+        radial-gradient(260px 260px at 20% 20%, rgba(0,242,254,0.12), transparent 60%),
+        radial-gradient(260px 260px at 80% 30%, rgba(167,139,250,0.12), transparent 60%),
+        radial-gradient(260px 260px at 60% 90%, rgba(251,113,133,0.10), transparent 65%);
+      filter:blur(12px);
+      pointer-events:none;
+    }
+
+    .hero-inner{ position:relative; z-index:2; }
+
+    .hero h2{
+      font-size:2.15em;
+      margin-bottom:8px;
+      letter-spacing:0.2px;
+      font-weight:1000;
+    }
+    .hero .subtitle{
+      color:#e5eeff;
+      font-size:1.03em;
+      max-width:980px;
+      line-height:1.55;
+      opacity:0.95;
+    }
+
+    .hero-chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
+    }
+    .chip{
+      font-size:0.85em;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.14);
+      background:rgba(255,255,255,0.06);
+      color:#f3f7ff;
+      font-weight:900;
+      backdrop-filter: blur(6px);
+    }
+    .chip.blue{ border-color:rgba(79,172,254,0.35); background:rgba(79,172,254,0.10); }
+    .chip.purple{ border-color:rgba(167,139,250,0.35); background:rgba(167,139,250,0.10); }
+    .chip.pink{ border-color:rgba(251,113,133,0.35); background:rgba(251,113,133,0.10); }
+    .chip.green{ border-color:rgba(52,211,153,0.35); background:rgba(52,211,153,0.10); }
+
+    .container{
+      padding:34px 44px;
+      max-width:1160px;
+    }
+
+    /* Cards */
+    .card{
+      background:rgba(255,255,255,0.92);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow2);
+      padding:18px;
+      margin-bottom:14px;
+      position:relative;
+      overflow:hidden;
+      backdrop-filter: blur(8px);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .card:hover{
+      transform:translateY(-2px);
+      box-shadow:var(--shadow);
+    }
+
+    /* Accent top bar per section */
+    .card.accent::before{
+      content:"";
+      position:absolute;
+      top:0; left:0; right:0;
+      height:4px;
+      background:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3),var(--accent4));
+    }
+    .card.accent2::before{
+      content:"";
+      position:absolute;
+      top:0; left:0; right:0;
+      height:4px;
+      background:linear-gradient(90deg,var(--accent5),var(--accent2),var(--accent1));
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:16px;
+    }
+    .span-7{grid-column:span 7;}
+    .span-5{grid-column:span 5;}
+    .span-6{grid-column:span 6;}
+    .span-12{grid-column:span 12;}
+
+    /* Gradient section titles */
+    h3{
+      font-size:1.25em;
+      margin-bottom:10px;
+      color:#0b1220;
+      font-weight:950;
+    }
+    .title-grad{
+      background:linear-gradient(135deg,var(--accent1),var(--accent3),var(--accent4));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .muted{color:var(--muted);}
+    .lead{font-size:1.05em; line-height:1.65;}
+    .tiny{font-size:0.9em;}
+
+    /* KPI */
+    .kpi{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:12px;
+    }
+    .kpi .box{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:12px;
+      background:#fff;
+      position:relative;
+      overflow:hidden;
+    }
+    .kpi .box::after{
+      content:"";
+      position:absolute;
+      inset:-60px;
+      background:
+        radial-gradient(200px 200px at 25% 20%, rgba(79,172,254,0.14), transparent 60%),
+        radial-gradient(200px 200px at 80% 30%, rgba(167,139,250,0.12), transparent 60%);
+      pointer-events:none;
+    }
+    .kpi .val{
+      position:relative;
+      font-weight:1000;
+      font-size:1.12em;
+      margin-bottom:4px;
+      color:#0b1220;
+    }
+    .kpi .lbl{
+      position:relative;
+      color:var(--muted);
+      font-size:0.86em;
+      line-height:1.35;
+    }
+
+    /* Callout */
+    .callout{
+      border:1px solid var(--line);
+      border-left:6px solid transparent;
+      border-image:linear-gradient(180deg,var(--accent1),var(--accent3),var(--accent4)) 1;
+      border-radius:18px;
+      padding:14px;
+      margin-top:12px;
+      background:#fff;
+    }
+    .callout b{ color:#0b1220; }
+    .callout p{ margin-top:6px; color:var(--muted); line-height:1.55; }
+
+    /* Pills */
+    .pillrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
+    .pilltag{
+      font-size:0.85em;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#ffffff;
+      color:#0b1220;
+      font-weight:900;
+      box-shadow:0 8px 18px rgba(2,6,23,0.06);
+    }
+    .pilltag.blue{ border-color:rgba(79,172,254,0.35); background:rgba(79,172,254,0.10); }
+    .pilltag.purple{ border-color:rgba(167,139,250,0.35); background:rgba(167,139,250,0.10); }
+    .pilltag.pink{ border-color:rgba(251,113,133,0.35); background:rgba(251,113,133,0.10); }
+    .pilltag.green{ border-color:rgba(52,211,153,0.35); background:rgba(52,211,153,0.10); }
+
+    /* Evidence list */
+    .evidence{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+      margin-top:12px;
+    }
+    .evi{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:12px 12px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:#fff;
+      position:relative;
+      overflow:hidden;
+    }
+    .evi::after{
+      content:"";
+      position:absolute;
+      inset:-80px;
+      background:
+        radial-gradient(220px 220px at 10% 30%, rgba(0,242,254,0.10), transparent 60%),
+        radial-gradient(220px 220px at 90% 30%, rgba(167,139,250,0.10), transparent 60%);
+      pointer-events:none;
+      opacity:0.65;
+    }
+    .evi b{position:relative;color:#0b1220;}
+    .evi span{position:relative;color:var(--muted);}
+
+    /* Content buttons */
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:14px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:11px 14px;
+      border-radius:14px;
+      font-weight:950;
+      font-size:0.95em;
+      text-decoration:none;
+      border:1px solid var(--line);
+      color:#0b1220;
+      background:#fff;
+      transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+      box-shadow:0 10px 18px rgba(2,6,23,0.06);
+    }
+    .btn:hover{ transform:translateY(-2px); box-shadow:0 16px 28px rgba(2,6,23,0.10); }
+
+    .btn.primary{
+      border:none;
+      color:#071018;
+      background:linear-gradient(135deg,var(--accent1),var(--accent2));
+    }
+    .btn.purple{
+      border:none;
+      color:#071018;
+      background:linear-gradient(135deg,var(--accent3),var(--accent4));
+    }
+    .btn:hover{ filter:brightness(1.01); }
+
+    .section-anchor{ scroll-margin-top:18px; }
+
+    /* Mobile */
+    @media (max-width: 1024px){
+      .sidebar{position:relative;width:100%;height:auto}
+      .main{margin-left:0}
+      .app{flex-direction:column}
+      .container{padding:24px 18px}
+      .hero{padding:28px 18px}
+    }
+    @media (max-width: 900px){
+      .grid{grid-template-columns:repeat(1,1fr)}
+      .span-7,.span-5,.span-6,.span-12{grid-column:span 12;}
+      .kpi{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <h1>DebraCapadona.com</h1>
+        <p>
+          Senior TPM / Program Delivery leader. Complex initiatives, regulated environments, calm execution under pressure.
+        </p>
+      </div>
+
+      <div class="side-cta">
+        <a class="sidebtn primary" href="https://edgeconditionanalysis.com" target="_blank" rel="noopener">
+          🔗 View system evidence
+        </a>
+        <a class="sidebtn" href="https://edgeconditionanalysis.com/resume.html" target="_blank" rel="noopener">
+          📄 Resume
+        </a>
+        <a class="sidebtn" href="https://www.linkedin.com/in/debcapadona/" target="_blank" rel="noopener">
+          💼 LinkedIn
+        </a>
+      </div>
+
+      <div class="proof">
+        <div class="proof-grid">
+          <div class="proof-item">
+            <div class="proof-val">Senior TPM</div>
+            <div class="proof-lbl">Delivery + governance<br>mindset</div>
+          </div>
+          <div class="proof-item">
+            <div class="proof-val">Calm</div>
+            <div class="proof-lbl">Clear judgment<br>under pressure</div>
+          </div>
+          <div class="proof-item">
+            <div class="proof-val">Systems</div>
+            <div class="proof-lbl">Architecture + execution<br>together</div>
+          </div>
+          <div class="proof-item">
+            <div class="proof-val">Evidence</div>
+            <div class="proof-lbl">Working artifact<br>not theory</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-title">On this page</div>
+      <nav class="nav">
+        <a href="#about">👤 About Deb</a>
+        <a href="#demeanor">🧭 Demeanor & Operating Style</a>
+        <a href="#ai-build">🤖 How I Built the System with AI</a>
+        <a href="#evidence">🧾 Evidence</a>
+      </nav>
+
+      <div class="nav-title">Connect</div>
+      <div class="side-links">
+        <a href="https://edgeconditionanalysis.com/resume.html" target="_blank" rel="noopener">📄 Resume</a>
+        <a href="https://www.linkedin.com/in/debcapadona/" target="_blank" rel="noopener">💼 LinkedIn</a>
+        <a href="https://github.com/debcapadona/predictive_linguistics_analysis" target="_blank" rel="noopener">💻 GitHub</a>
+        <!-- TODO: replace with real email or remove -->
+        <a href="mailto:debra.capadona@example.com">✉️ Email</a>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <header class="hero">
+        <div class="hero-inner">
+          <h2>Debra Capadona</h2>
+          <p class="subtitle">
+            Senior technology and program strategist operating at the intersection of complexity and execution.
+            Known for composure, sound judgment, and steady delivery in environments where ambiguity + risk are real.
+          </p>
+
+          <div class="hero-chips">
+            <div class="chip blue">High-stakes delivery</div>
+            <div class="chip purple">Regulated environments</div>
+            <div class="chip pink">Governance & risk</div>
+            <div class="chip green">Systems thinking</div>
+            <div class="chip blue">Evidence-driven</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="container">
+
+        <!-- ABOUT -->
+        <section id="about" class="card accent section-anchor">
+          <h3 class="title-grad">About Deb</h3>
+
+          <div class="grid">
+            <div class="span-7">
+              <p class="lead">
+                I lead complex technical programs end-to-end — from ambiguity to execution — with a bias for clarity,
+                governance, and outcomes that hold up under scrutiny.
+              </p>
+
+              <p class="muted" style="margin-top:10px; line-height:1.6;">
+                My work tends to live in the “hard mode” zones: cross-functional delivery, competing stakeholders,
+                incomplete information, and high accountability. I translate between technical, regulatory, and business
+                audiences without turning the truth into mush.
+              </p>
+
+              <div class="callout">
+                <b>What you get with me:</b>
+                <p>
+                  A steady operator who ships real results, protects the organization from avoidable risk,
+                  and keeps decisions explicit — not “vibes-based.”
+                </p>
+              </div>
+            </div>
+
+            <div class="span-5">
+              <h3 style="margin-bottom:8px;" class="title-grad">Known for</h3>
+              <div class="evidence">
+                <div class="evi">
+                  <b>Judgment</b>
+                  <span>— prioritization + tradeoffs that don’t collapse under pressure.</span>
+                </div>
+                <div class="evi">
+                  <b>Clarity</b>
+                  <span>— turning ambiguity into a delivery plan with boundaries and ownership.</span>
+                </div>
+                <div class="evi">
+                  <b>Execution</b>
+                  <span>— steady progress, fewer surprises, and measurable outcomes.</span>
+                </div>
+                <div class="evi">
+                  <b>Risk sense</b>
+                  <span>— guardrails that enable velocity, not bureaucracy.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="kpi">
+            <div class="box">
+              <div class="val">Complex Programs</div>
+              <div class="lbl">High ambiguity, cross-functional scope, real deadlines, real consequences.</div>
+            </div>
+            <div class="box">
+              <div class="val">Regulated Delivery</div>
+              <div class="lbl">Governance, controls, traceability — built in, not bolted on.</div>
+            </div>
+            <div class="box">
+              <div class="val">Systems Mindset</div>
+              <div class="lbl">Architecture + execution together, with decisions documented and repeatable.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- DEMEANOR -->
+        <section id="demeanor" class="card accent2 section-anchor">
+          <h3 class="title-grad">Demeanor & Operating Style</h3>
+          <p class="lead">
+            I’m calm on purpose. When the room gets loud, emotional, or political, I stay steady and focus on outcomes,
+            risk, and the decisions that move work forward.
+          </p>
+
+          <div class="grid" style="margin-top:12px;">
+            <div class="span-6">
+              <div class="evi">
+                <b>Composed under pressure</b>
+                <span>— clear thinking when stakes are high and inputs are messy.</span>
+              </div>
+              <div class="evi">
+                <b>Direct, not sharp</b>
+                <span>— firm boundaries and clean communication without unnecessary friction.</span>
+              </div>
+              <div class="evi">
+                <b>Decision-first leadership</b>
+                <span>— tradeoffs surfaced early so teams don’t drift into accidental architecture.</span>
+              </div>
+            </div>
+            <div class="span-6">
+              <div class="evi">
+                <b>High accountability</b>
+                <span>— ownership stays explicit: who decides, who executes, what “done” means.</span>
+              </div>
+              <div class="evi">
+                <b>Practical governance</b>
+                <span>— guardrails that keep velocity without turning into red tape.</span>
+              </div>
+              <div class="evi">
+                <b>Stakeholder translation</b>
+                <span>— technical ↔ regulatory ↔ business without losing fidelity.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pillrow">
+            <div class="pilltag blue">Clarity over chaos</div>
+            <div class="pilltag purple">Boundaries over burnout</div>
+            <div class="pilltag pink">Evidence over narrative</div>
+            <div class="pilltag green">Velocity with controls</div>
+          </div>
+        </section>
+
+        <!-- AI BUILD -->
+        <section id="ai-build" class="card accent section-anchor">
+          <h3 class="title-grad">How I Built the System with AI</h3>
+          <p class="lead">
+            I use AI as an accelerator — not an authority. The method is deliberate: structured prompts, verification loops,
+            and delivery guardrails to prevent “confident wrongness.”
+          </p>
+
+          <div class="grid" style="margin-top:12px;">
+            <div class="span-7">
+              <h3 class="title-grad" style="margin-bottom:8px;">Approach</h3>
+              <div class="evidence">
+                <div class="evi">
+                  <b>Role separation</b>
+                  <span>— prompts map to jobs: synthesize, validate, refactor, document.</span>
+                </div>
+                <div class="evi">
+                  <b>Output contracts</b>
+                  <span>— structured outputs (schemas, checklists, diffs) instead of free-form prose.</span>
+                </div>
+                <div class="evi">
+                  <b>Verification loops</b>
+                  <span>— edge cases, counterexamples, and “what breaks?” built into the workflow.</span>
+                </div>
+                <div class="evi">
+                  <b>Human authority retained</b>
+                  <span>— AI produces inputs; I make decisions and own outcomes.</span>
+                </div>
+              </div>
+
+              <div class="callout">
+                <b>Why this matters:</b>
+                <p>
+                  AI can generate persuasive nonsense. This delivery posture prevents that: constrain outputs, validate,
+                  document boundaries, and keep claims bounded to what’s defensible.
+                </p>
+              </div>
+            </div>
+
+            <div class="span-5">
+              <h3 class="title-grad" style="margin-bottom:8px;">Guardrails</h3>
+              <div class="evidence">
+                <div class="evi">
+                  <b>Bounded scope</b>
+                  <span>— claims are limited to what can be validated and explained.</span>
+                </div>
+                <div class="evi">
+                  <b>Traceability</b>
+                  <span>— decisions and outputs can be inspected and rerun.</span>
+                </div>
+                <div class="evi">
+                  <b>Repeatability</b>
+                  <span>— consistent structure across runs for clean comparison.</span>
+                </div>
+                <div class="evi">
+                  <b>Risk posture</b>
+                  <span>— “prevent confidently wrong” treated as a core requirement.</span>
+                </div>
+              </div>
+
+              <p class="tiny muted" style="margin-top:12px;">
+                If you want the how-to detail, it’s captured in the implementation and documentation in GitHub.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- EVIDENCE -->
+        <section id="evidence" class="card accent2 section-anchor">
+          <h3 class="title-grad">Evidence</h3>
+          <p class="muted" style="line-height:1.6;">
+            The easiest way to evaluate how I work is to look at what I ship. The system is hosted separately so this page
+            can stay focused on the professional story and delivery method.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn primary" href="https://edgeconditionanalysis.com" target="_blank" rel="noopener">
+              🔗 Open EdgeConditionAnalysis.com (live system)
+            </a>
+            <a class="btn purple" href="https://github.com/debcapadona/predictive_linguistics_analysis" target="_blank" rel="noopener">
+              💻 GitHub (reference implementation)
+            </a>
+            <a class="btn" href="https://edgeconditionanalysis.com/resume.html" target="_blank" rel="noopener">
+              📄 Resume
+            </a>
+          </div>
+
+          <div class="evidence" style="margin-top:14px;">
+            <div class="evi">
+              <b>System</b>
+              <span>— interactive views, corpus processing, and visualization of outputs.</span>
+            </div>
+            <div class="evi">
+              <b>Method</b>
+              <span>— repeatable workflow: structured prompting, verification loops, bounded claims.</span>
+            </div>
+            <div class="evi">
+              <b>Delivery posture</b>
+              <span>— governance-minded execution designed for real-world scrutiny.</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+</body>
+</html>
