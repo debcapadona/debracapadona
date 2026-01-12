@@ -1,0 +1,11 @@
+# Archive versions (keep local, don't push to GitHub)
+archive_versions/
+
+# Editor temporary files
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db

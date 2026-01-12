@@ -1,0 +1,156 @@
+<!-- genai_force_multiplier.html (LLMs as force multiplier, not "system component") -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GenAI as Force Multiplier — Debra Capadona</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.4;color:#2c3e50;background:#f5f7fa}
+    .app-container{display:flex;min-height:100vh}
+    .sidebar{width:280px;background:#1a1d29;color:#fff;padding:25px 18px;position:fixed;height:100vh;overflow-y:auto}
+    .sidebar-header{margin-bottom:20px}
+    .sidebar-header h1{font-size:1.2em;margin-bottom:6px;color:#4facfe}
+    .sidebar-header .tagline{font-size:.8em;color:#a8b2c1;line-height:1.3}
+    .nav-section{margin-bottom:20px}
+    .nav-section-title{font-size:.7em;text-transform:uppercase;letter-spacing:1px;color:#6c7a8f;margin-bottom:10px;font-weight:600}
+    .nav-item{padding:10px 13px;margin-bottom:4px;border-radius:6px;cursor:pointer;transition:all .3s;font-size:.88em;display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+    .nav-item:hover{background:#252938}
+    .nav-item.active{background:linear-gradient(135deg,#4facfe 0%,#00f2fe 100%);color:#fff}
+    .nav-icon{font-size:1.1em}
+    .main-content{margin-left:280px;flex:1;padding:0}
+    .hero{background:linear-gradient(135deg,#1a1d29 0%,#2a2f3f 100%);color:#fff;padding:40px}
+    .hero h2{font-size:2em;margin-bottom:10px;color:#fff}
+    .hero p{color:#a8b2c1;font-size:1em}
+    .breadcrumbs{padding:15px 40px;background:#fff;border-bottom:1px solid #e9ecef;font-size:.9em;color:#6c7a8f}
+    .breadcrumbs a{color:#4facfe;text-decoration:none;cursor:pointer;transition:color .3s}
+    .breadcrumbs a:hover{color:#00f2fe;text-decoration:underline}
+    .breadcrumbs .separator{margin:0 8px;color:#d1d8e0}
+    .breadcrumbs .current{color:#2c3e50;font-weight:600}
+    .content{padding:40px}
+    .viz-container{background:#fff;padding:25px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);margin-bottom:25px}
+    .viz-container h3{margin-bottom:10px;color:#1a1d29;font-size:1.3em}
+    .lead{color:#2c3e50;line-height:1.7;font-size:1.05em}
+    .subtle{color:#6c7a8f;line-height:1.7;font-size:.95em}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+    .card{background:#fff;padding:22px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:4px solid #4facfe}
+    .card h4{color:#1a1d29;margin-bottom:8px}
+    .pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .pill{background:#f5f7fa;border:1px solid #e9ecef;color:#2c3e50;padding:8px 10px;border-radius:999px;font-size:.85em}
+    .callout{border-left:4px solid #4facfe;background:#f8fbff;padding:14px 16px;border-radius:8px}
+    .callout strong{color:#1a1d29}
+    ul{margin-left:18px}
+    li{margin:8px 0}
+    @media(max-width:1024px){.sidebar{width:100%;position:relative;height:auto}.main-content{margin-left:0}.app-container{flex-direction:column}.content{padding:20px}.breadcrumbs{padding:15px 20px}}
+    @media(max-width:768px){.hero{padding:25px 20px}.hero h2{font-size:1.5em}}
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h1>DebraCapadona.com</h1>
+        <p class="tagline">GenAI + systems delivery demonstration — how an end-to-end linguistic analysis platform was designed, built, and iterated.</p>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Start</div>
+        <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span><span>DebraCapadona.com</span></a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">GenAI & Prompting</div>
+        <a class="nav-item active" href="genai_force_multiplier.html"><span class="nav-icon">🧠</span><span>GenAI as Force Multiplier</span></a>
+        <a class="nav-item" href="prompt_style.html"><span class="nav-icon">✍️</span><span>Prompt Style & Patterns</span></a>
+        <a class="nav-item" href="groq_prompt.html"><span class="nav-icon">🧾</span><span>Groq Prompt (Example)</span></a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Connect</div>
+        <a href="https://www.linkedin.com/in/debcapadona/" target="_blank" class="nav-item"><span class="nav-icon">💼</span><span>LinkedIn</span></a>
+        <a href="https://github.com/debcapadona/predictive_linguistics_analysis" target="_blank" class="nav-item"><span class="nav-icon">💻</span><span>GitHub</span></a>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="hero">
+        <h2>GenAI as Force Multiplier</h2>
+        <p>How LLMs accelerated delivery while architecture, judgment, and accountability stayed human-owned.</p>
+      </div>
+
+      <div class="breadcrumbs">
+        <a href="index.html">Index</a>
+        <span class="separator">›</span>
+        <span class="current">GenAI as Force Multiplier</span>
+      </div>
+
+      <div class="content">
+        <div class="viz-container">
+          <p class="lead">
+            I used GenAI to move faster and explore more options—not to outsource thinking.
+            The work still required systems decomposition, critical judgment, and iteration when early ideas didn’t work.
+          </p>
+          <div class="pill-row">
+            <div class="pill">Design acceleration</div>
+            <div class="pill">Prompt engineering</div>
+            <div class="pill">Iteration loops</div>
+            <div class="pill">Quality gates</div>
+            <div class="pill">Human-owned decisions</div>
+          </div>
+        </div>
+
+        <div class="viz-container callout">
+          <strong>Positioning (plain English):</strong>
+          GenAI improved throughput and creativity. I owned architecture, trade-offs, validation, and the final output.
+        </div>
+
+        <div class="grid" style="margin-top:20px;">
+          <div class="card">
+            <h4>Where GenAI Helped Most</h4>
+            <ul class="subtle">
+              <li><strong style="color:#1a1d29;">Decomposition:</strong> mapping a vague goal into buildable modules and interfaces.</li>
+              <li><strong style="color:#1a1d29;">Prompted scoring design:</strong> turning “signal ideas” into explicit dimension definitions and output contracts.</li>
+              <li><strong style="color:#1a1d29;">Implementation acceleration:</strong> drafting code skeletons, edge-case handling, refactors.</li>
+              <li><strong style="color:#1a1d29;">Debugging:</strong> fast hypothesis generation for failures and bad outputs.</li>
+              <li><strong style="color:#1a1d29;">Documentation:</strong> converting decisions into crisp write-ups for repeatability.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h4>What GenAI Did Not Replace</h4>
+            <ul class="subtle">
+              <li><strong style="color:#1a1d29;">Architecture ownership:</strong> data flow, boundaries, extensibility decisions.</li>
+              <li><strong style="color:#1a1d29;">Trade-offs:</strong> MVP scope vs accuracy vs compute vs time.</li>
+              <li><strong style="color:#1a1d29;">Validation judgment:</strong> what counts as “signal” vs noise vs artifact.</li>
+              <li><strong style="color:#1a1d29;">Interpretability choices:</strong> scoring and visualization that don’t overclaim.</li>
+              <li><strong style="color:#1a1d29;">Iteration discipline:</strong> knowing when to redo work instead of polishing the wrong thing.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h4>How I Kept It Reliable</h4>
+            <ul class="subtle">
+              <li><strong style="color:#1a1d29;">Output contracts:</strong> prompts required strict JSON only.</li>
+              <li><strong style="color:#1a1d29;">Clear definitions:</strong> each dimension had a measurable meaning, not vibes.</li>
+              <li><strong style="color:#1a1d29;">Repeatable prompts:</strong> reusable templates rather than one-off chatting.</li>
+              <li><strong style="color:#1a1d29;">Human review gates:</strong> spot checks and sanity checks before scaling runs.</li>
+              <li><strong style="color:#1a1d29;">Versioned iteration:</strong> prompts evolve like code: changed deliberately, tested, kept or rolled back.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="viz-container" style="margin-top:25px;">
+          <h3>Concrete Example</h3>
+          <p class="subtle" style="margin-bottom:12px;">
+            See the exact prompt used to score text across nine narrative dimensions:
+          </p>
+          <p class="subtle">
+            → <a href="groq_prompt.html" style="color:#4facfe;text-decoration:none;font-weight:600;">Groq Prompt (Example)</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
