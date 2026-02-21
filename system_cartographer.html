@@ -5,718 +5,231 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>System Cartographer | DebraCapadona.com</title>
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --sidebar-bg: #1a2235;
-      --sidebar-width: 155px;
-      --teal: #2dd4c4;
-      --teal-dark: #1a9e90;
-      --blue: #3b82f6;
-      --bg: #f0f2f5;
-      --card: #ffffff;
-      --ink: #1e2433;
-      --mid: #64748b;
-      --light: #94a3b8;
-      --border: #e2e8f0;
-      --highlight: #f0fdfb;
-      --badge-green: #d1fae5;
-      --badge-green-text: #065f46;
-      --badge-yellow: #fef3c7;
-      --badge-yellow-text: #92400e;
-      --badge-blue: #dbeafe;
-      --badge-blue-text: #1e40af;
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --bg:#f5f7fa;--ink:#141824;--muted:#6c7a8f;--panel:#ffffff;--line:#e9ecef;
+      --sidebar:#0f172a;--sidebar2:#111b35;
+      --accent1:#7c3aed;--accent2:#06b6d4;--accent3:#f97316;
+      --shadow:0 10px 30px rgba(15,23,42,0.10);--shadow2:0 2px 10px rgba(0,0,0,0.06);--radius:18px;
     }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.5;
-      display: flex;
-      min-height: 100vh;
-    }
-
-    /* ── SIDEBAR ── */
-    .sidebar {
-      width: var(--sidebar-width);
-      background: var(--sidebar-bg);
-      position: fixed;
-      top: 0; left: 0; bottom: 0;
-      overflow-y: auto;
-      padding: 16px 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      z-index: 10;
-    }
-
-    .sidebar-brand {
-      color: var(--teal);
-      font-size: 0.82em;
-      font-weight: 700;
-      line-height: 1.3;
-      text-decoration: none;
-    }
-    .sidebar-brand span {
-      display: block;
-      color: #94a3b8;
-      font-size: 0.8em;
-      font-weight: 400;
-      margin-top: 4px;
-      line-height: 1.35;
-    }
-
-    .sidebar-section-label {
-      font-size: 0.6em;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #64748b;
-      margin-bottom: 6px;
-    }
-
-    .sidebar-nav { display: flex; flex-direction: column; gap: 2px; }
-    .sidebar-nav a {
-      display: block;
-      font-size: 0.75em;
-      color: #cbd5e1;
-      text-decoration: none;
-      padding: 4px 6px;
-      border-radius: 4px;
-      line-height: 1.4;
-      transition: background 0.15s, color 0.15s;
-    }
-    .sidebar-nav a:hover { background: rgba(255,255,255,0.08); color: #fff; }
-    .sidebar-nav a.active { color: var(--teal); }
-
-    .sidebar-snapshot {
-      background: rgba(255,255,255,0.05);
-      border-radius: 8px;
-      padding: 10px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-    }
-    .snap-item {
-      text-align: center;
-      padding: 6px 4px;
-      background: rgba(255,255,255,0.04);
-      border-radius: 6px;
-    }
-    .snap-val {
-      display: block;
-      font-size: 1em;
-      font-weight: 800;
-      color: var(--teal);
-      line-height: 1.1;
-    }
-    .snap-label {
-      display: block;
-      font-size: 0.6em;
-      color: #64748b;
-      line-height: 1.3;
-      margin-top: 2px;
-    }
-
-    .sidebar-connect { margin-top: auto; }
-    .sidebar-connect a {
-      display: block;
-      font-size: 0.72em;
-      color: #64748b;
-      text-decoration: none;
-      padding: 3px 0;
-      transition: color 0.15s;
-    }
-    .sidebar-connect a:hover { color: var(--teal); }
-
-    /* ── MAIN ── */
-    .main {
-      margin-left: var(--sidebar-width);
-      flex: 1;
-      padding: 24px 28px;
-      max-width: 860px;
-    }
-
-    /* ── HERO CARD ── */
-    .hero-card {
-      background: var(--sidebar-bg);
-      color: white;
-      border-radius: 12px;
-      padding: 28px 32px;
-      margin-bottom: 20px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-card::before {
-      content: '';
-      position: absolute;
-      top: -40px; right: -40px;
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(45,212,196,0.12) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-eyebrow {
-      font-size: 0.72em;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 10px;
-    }
-
-    .hero-title {
-      font-size: 1.75em;
-      font-weight: 800;
-      color: white;
-      margin-bottom: 14px;
-      line-height: 1.2;
-    }
-
-    .hero-thesis {
-      font-size: 0.95em;
-      color: #cbd5e1;
-      max-width: 600px;
-      line-height: 1.65;
-      margin-bottom: 18px;
-    }
-    .hero-thesis strong { color: white; }
-
-    .hero-meta {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 4px 10px;
-      border-radius: 100px;
-      font-size: 0.72em;
-      font-weight: 600;
-    }
-    .badge-teal { background: rgba(45,212,196,0.15); color: var(--teal); border: 1px solid rgba(45,212,196,0.3); }
-    .badge-teal::before { content: '●'; font-size: 0.7em; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-    .hero-date { font-size: 0.75em; color: #64748b; }
-
-    .hero-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 14px;
-      border-radius: 6px;
-      font-size: 0.8em;
-      font-weight: 600;
-      text-decoration: none;
-      transition: opacity 0.15s;
-      cursor: pointer;
-    }
-    .btn:hover { opacity: 0.85; }
-    .btn-teal { background: var(--teal); color: #0f2030; }
-    .btn-outline { background: rgba(255,255,255,0.08); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.15); }
-
-    /* ── CARDS ── */
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 24px 28px;
-      margin-bottom: 16px;
-    }
-
-    .card-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .card-icon {
-      width: 36px; height: 36px;
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1em;
-      flex-shrink: 0;
-      background: var(--highlight);
-    }
-
-    .card-title {
-      font-size: 1.05em;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 3px;
-    }
-
-    .card-subtitle {
-      font-size: 0.8em;
-      color: var(--mid);
-    }
-
-    .card-body {
-      font-size: 0.9em;
-      color: var(--mid);
-      line-height: 1.7;
-    }
-    .card-body strong { color: var(--ink); }
-    .card-body p { margin-bottom: 10px; }
-    .card-body p:last-child { margin-bottom: 0; }
-
-    /* ── PILLAR GRID ── */
-    .pillar-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .pillar {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px;
-    }
-    .pillar-num {
-      font-size: 0.68em;
-      font-weight: 700;
-      color: var(--teal-dark);
-      letter-spacing: 0.05em;
-      margin-bottom: 6px;
-    }
-    .pillar-title {
-      font-size: 0.85em;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 6px;
-    }
-    .pillar-desc {
-      font-size: 0.8em;
-      color: var(--mid);
-      line-height: 1.55;
-    }
-
-    /* ── QUESTIONS ── */
-    .questions { display: grid; gap: 8px; margin-top: 16px; }
-
-    .question {
-      display: grid;
-      grid-template-columns: 32px 1fr;
-      gap: 12px;
-      padding: 12px 14px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      transition: border-color 0.15s;
-    }
-    .question:hover { border-color: var(--teal); }
-
-    .q-num {
-      font-size: 0.7em;
-      font-weight: 700;
-      color: var(--teal-dark);
-      padding-top: 1px;
-    }
-    .q-text {
-      font-size: 0.85em;
-      color: var(--mid);
-      line-height: 1.5;
-    }
-    .q-text strong { color: var(--ink); }
-
-    /* ── TIER GRID ── */
-    .tier-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .tier {
-      border-radius: 8px;
-      padding: 16px;
-      border: 1px solid var(--border);
-    }
-    .tier-label {
-      font-size: 0.68em;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 6px;
-    }
-    .tier-desc { font-size: 0.8em; color: var(--mid); line-height: 1.55; }
-
-    .tier-1 { background: #f0fdfb; border-color: #a7f3d0; }
-    .tier-1 .tier-label { color: #065f46; }
-    .tier-2 { background: #eff6ff; border-color: #bfdbfe; }
-    .tier-2 .tier-label { color: #1e40af; }
-    .tier-3 { background: #fef2f2; border-color: #fecaca; }
-    .tier-3 .tier-label { color: #991b1b; }
-
-    /* ── STATS ROW ── */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .stat-box {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px 12px;
-      text-align: center;
-    }
-    .stat-val {
-      font-size: 1.8em;
-      font-weight: 800;
-      color: var(--teal-dark);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .stat-label {
-      font-size: 0.75em;
-      color: var(--mid);
-      line-height: 1.4;
-    }
-
-    /* ── COLLAB BLOCK ── */
-    .collab-block {
-      background: var(--highlight);
-      border: 1px solid #99f6e4;
-      border-radius: 10px;
-      padding: 24px 28px;
-      margin-bottom: 16px;
-    }
-    .collab-block .card-title { color: var(--teal-dark); margin-bottom: 10px; }
-    .collab-block .card-body { color: #374151; }
-    .collab-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 16px;
-      padding: 8px 16px;
-      background: var(--teal);
-      color: #0f2030;
-      border-radius: 6px;
-      font-size: 0.82em;
-      font-weight: 700;
-      text-decoration: none;
-    }
-    .collab-link:hover { opacity: 0.85; }
-
-    /* ── STATUS ITEMS ── */
-    .status-list { display: grid; gap: 8px; margin-top: 16px; }
-    .status-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.85em;
-      color: var(--mid);
-      padding: 8px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .status-item:last-child { border-bottom: none; }
-    .status-item strong { color: var(--ink); }
-
-    .pill {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 100px;
-      font-size: 0.72em;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-    .pill-green { background: var(--badge-green); color: var(--badge-green-text); }
-    .pill-yellow { background: var(--badge-yellow); color: var(--badge-yellow-text); }
-    .pill-blue { background: var(--badge-blue); color: var(--badge-blue-text); }
-
-    @media (max-width: 1024px) {
-      .sidebar { position: relative; width: 100%; height: auto; flex-direction: row; flex-wrap: wrap; gap: 12px; padding: 16px; }
-      .main { margin-left: 0; width: 100%; max-width: 100%; }
-      body { flex-direction: column; }
-      .sidebar-connect { margin-top: 0; }
-      .pillar-grid { grid-template-columns: 1fr; }
-      .stats-row { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 700px) {
-      .tier-grid { grid-template-columns: 1fr; }
-      .stats-row { grid-template-columns: 1fr 1fr; }
-      .hero-card { padding: 20px; }
-      .card { padding: 18px; }
-      .hero-title { font-size: 1.4em; }
-      .hero-links { flex-direction: column; }
-      .btn { width: 100%; justify-content: center; }
-    }
+    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.45;color:var(--ink);background:var(--bg);}
+    .app{display:flex;min-height:100vh}
+    .sidebar{width:290px;background:linear-gradient(180deg,var(--sidebar) 0%, var(--sidebar2) 100%);color:#fff;padding:22px 18px;position:fixed;height:100vh;overflow-y:auto;border-right:1px solid rgba(255,255,255,0.08);}
+    .brand{padding:14px 12px;border-radius:16px;border:1px solid rgba(255,255,255,0.10);background:rgba(255,255,255,0.04);box-shadow:0 10px 20px rgba(0,0,0,0.12);margin-bottom:14px;}
+    .brand h1{font-size:1.05em;letter-spacing:0.2px;margin-bottom:6px;background:linear-gradient(135deg,var(--accent2),#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:900;}
+    .brand p{font-size:0.82em;color:#cbd5e1;line-height:1.35;}
+    .nav-title{font-size:0.7em;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin:14px 0 10px;font-weight:800;}
+    .nav a{display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border-radius:12px;text-decoration:none;color:#e5e7eb;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.03);transition:all .2s ease;font-size:0.92em;}
+    .nav a:hover{transform:translateY(-2px);border-color:rgba(255,255,255,0.14);background:rgba(255,255,255,0.06);}
+    .nav a.active{border-color:rgba(6,182,212,0.40);background:rgba(6,182,212,0.10);color:#06b6d4;}
+    .mini-proof{margin-top:12px;padding:12px 12px;border-radius:16px;border:1px solid rgba(255,255,255,0.10);background:linear-gradient(135deg, rgba(124,58,237,0.18) 0%, rgba(6,182,212,0.12) 55%, rgba(249,115,22,0.10) 100%),rgba(255,255,255,0.04);box-shadow:0 12px 30px rgba(0,0,0,0.14);}
+    .mini-proof .k{font-size:0.72em;letter-spacing:0.8px;text-transform:uppercase;color:#cbd5e1;margin-bottom:8px;font-weight:900;}
+    .mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .mini{padding:10px 10px;border-radius:14px;border:1px solid rgba(255,255,255,0.10);background:rgba(15,23,42,0.30);text-align:center;}
+    .mini .val{font-weight:900;font-size:1.05em;background:linear-gradient(135deg,#93c5fd,#a78bfa,#22d3ee);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:2px;}
+    .mini .lbl{font-size:0.68em;color:#cbd5e1;line-height:1.15;}
+    .side-links{margin-top:12px;}
+    .side-links a{display:block;text-decoration:none;color:#e5e7eb;padding:9px 10px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.03);transition:all .2s ease;font-size:0.90em;margin-bottom:8px;}
+    .side-links a:hover{transform:translateY(-2px);border-color:rgba(255,255,255,0.14);background:rgba(255,255,255,0.06);}
+    .main{margin-left:290px;flex:1;min-width:0;}
+    .hero{padding:44px 44px 28px;color:#fff;background:radial-gradient(1200px 500px at 20% 10%, rgba(124,58,237,0.35) 0%, rgba(124,58,237,0.0) 55%),radial-gradient(900px 420px at 75% 0%, rgba(6,182,212,0.30) 0%, rgba(6,182,212,0.0) 60%),radial-gradient(900px 520px at 60% 120%, rgba(249,115,22,0.18) 0%, rgba(249,115,22,0.0) 55%),linear-gradient(135deg,var(--sidebar) 0%, var(--sidebar2) 100%);border-bottom:1px solid rgba(0,0,0,0.06);position:relative;overflow:hidden;}
+    .hero h2{font-size:2.15em;margin-bottom:8px;letter-spacing:0.2px;font-weight:950;}
+    .hero .subtitle{color:#d1d5db;font-size:1.03em;max-width:780px;line-height:1.55;}
+    .hero-badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:center;}
+    .chip{font-size:0.85em;padding:7px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.06);color:#fff;font-weight:800;backdrop-filter:blur(6px);}
+    .chip.hot{border:none;color:#0b1220;background:linear-gradient(135deg,var(--accent2),#a78bfa);}
+    .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px;align-items:center;}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:14px;font-weight:900;font-size:0.95em;text-decoration:none;border:1px solid rgba(255,255,255,0.14);color:#fff;background:rgba(255,255,255,0.06);transition:all .2s ease;backdrop-filter:blur(6px);}
+    .btn:hover{transform:translateY(-2px);background:rgba(255,255,255,0.10);}
+    .btn.primary{border:none;color:#0b1220;background:linear-gradient(135deg,var(--accent2),#a78bfa);box-shadow:0 12px 30px rgba(6,182,212,0.18);}
+    .btn.primary:hover{filter:brightness(1.03);}
+    .btn.ghost{border:1px solid rgba(255,255,255,0.18);background:rgba(15,23,42,0.10);}
+    .container{padding:28px 44px 44px;max-width:900px;}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow2);padding:18px;margin-bottom:16px;}
+    h3{font-size:1.2em;margin-bottom:10px;color:#0b1220;letter-spacing:0.2px;font-weight:950;}
+    .muted{color:var(--muted);}.lead{font-size:1.03em;line-height:1.65;}.tiny{font-size:0.92em;}
+    .rows{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px;}
+    .row{display:flex;gap:12px;align-items:flex-start;padding:12px 12px;border-radius:16px;border:1px solid var(--line);background:#fff;}
+    .row .icon{width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#0b1220;background:linear-gradient(135deg, rgba(124,58,237,0.20), rgba(6,182,212,0.16));border:1px solid rgba(124,58,237,0.18);flex:0 0 34px;}
+    .row b{color:#0b1220;}.row span{color:var(--muted);}
+    .proof-panel{border-radius:var(--radius);padding:18px;border:1px solid rgba(124,58,237,0.18);background:linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(6,182,212,0.07) 55%, rgba(249,115,22,0.05) 100%),#ffffff;box-shadow:var(--shadow);position:relative;overflow:hidden;margin-bottom:16px;}
+    .proof-panel::after{content:"";position:absolute;right:-120px;top:-160px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(6,182,212,0.35), rgba(124,58,237,0.0) 60%);opacity:0.9;pointer-events:none;}
+    .proof-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;}
+    .btn-dark{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:14px;font-weight:900;font-size:0.95em;text-decoration:none;color:#0b1220;border:1px solid rgba(15,23,42,0.10);background:linear-gradient(135deg, rgba(6,182,212,0.16), rgba(124,58,237,0.14));transition:all .2s ease;}
+    .btn-dark:hover{transform:translateY(-2px);filter:brightness(1.02);}
+    .btn-outline{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:14px;font-weight:900;font-size:0.95em;text-decoration:none;color:#0b1220;border:1px solid rgba(15,23,42,0.14);background:#fff;transition:all .2s ease;}
+    .btn-outline:hover{transform:translateY(-2px);background:#f8fafc;}
+    .pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:#f8fafc;color:#0b1220;font-weight:800;font-size:0.85em;text-decoration:none;}
+    /* status badges */
+    .badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:0.75em;font-weight:800;}
+    .badge-green{background:#d1fae5;color:#065f46;}
+    .badge-yellow{background:#fef3c7;color:#92400e;}
+    .badge-blue{background:#dbeafe;color:#1e40af;}
+    /* pillar grid */
+    .pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px;}
+    .pillar{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:16px;}
+    .pillar .num{font-size:0.7em;font-weight:900;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+    .pillar b{display:block;color:#0b1220;margin-bottom:6px;font-size:0.95em;}
+    .pillar p{font-size:0.85em;color:var(--muted);line-height:1.55;}
+    /* tier grid */
+    .tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px;}
+    .tier{border-radius:14px;padding:16px;border:1px solid var(--line);}
+    .tier b{display:block;font-size:0.82em;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;}
+    .tier p{font-size:0.82em;color:var(--muted);line-height:1.5;}
+    .tier-1{background:#f0fdfb;border-color:#a7f3d0;}.tier-1 b{color:#065f46;}
+    .tier-2{background:#eff6ff;border-color:#bfdbfe;}.tier-2 b{color:#1e40af;}
+    .tier-3{background:#fef2f2;border-color:#fecaca;}.tier-3 b{color:#991b1b;}
+    /* stats */
+    .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px;}
+    .stat{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;}
+    .stat .val{font-size:2em;font-weight:950;background:linear-gradient(135deg,var(--accent2),#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin-bottom:6px;}
+    .stat p{font-size:0.78em;color:var(--muted);line-height:1.4;}
+    /* status list */
+    .status-row{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:0.9em;}
+    .status-row:last-child{border-bottom:none;}
+    .status-row .txt{color:var(--muted);line-height:1.5;}
+    .status-row .txt b{color:#0b1220;}
+    /* collab */
+    .collab{background:linear-gradient(135deg,rgba(6,182,212,0.08),rgba(124,58,237,0.06)),#fff;border:1px solid rgba(6,182,212,0.22);border-radius:var(--radius);padding:24px 28px;margin-bottom:16px;}
+    .collab h3{color:#0f172a;}
+    .collab p{color:var(--muted);line-height:1.7;margin-top:10px;font-size:0.95em;}
+    /* responsive - exact same as index */
+    @media (max-width: 1024px){.sidebar{position:relative;width:100%;height:auto}.main{margin-left:0}.app{flex-direction:column}.container{padding:22px 18px 40px}.hero{padding:28px 18px}.pillar-grid{grid-template-columns:1fr}.tier-grid{grid-template-columns:1fr}.stat-grid{grid-template-columns:1fr 1fr}}
+    @media (max-width: 900px){.pillar-grid{grid-template-columns:1fr}}
+    @media (max-width: 600px){.stat-grid{grid-template-columns:1fr 1fr}.tier-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-
-<!-- SIDEBAR -->
-<aside class="sidebar">
-  <a href="index.html" class="sidebar-brand">
-    DebraCapadona.com
-    <span>AI-first system design. Working artifacts.</span>
-  </a>
-
-  <div>
-    <div class="sidebar-section-label">Fast Paths</div>
-    <nav class="sidebar-nav">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <h1>DebraCapadona.com</h1>
+      <p>System Cartographer — AI decision point framework for enterprise systems.</p>
+    </div>
+    <div class="nav-title">Fast Paths</div>
+    <nav class="nav">
       <a href="index.html">← Back to main profile</a>
       <a href="#framework" class="active">⬡ The Framework</a>
       <a href="#questions">Nine Questions</a>
       <a href="#confidence">Confidence Model</a>
       <a href="#validation">Validation</a>
     </nav>
-  </div>
-
-  <div>
-    <div class="sidebar-section-label">Research Snapshot</div>
-    <div class="sidebar-snapshot">
-      <div class="snap-item">
-        <span class="snap-val">682</span>
-        <span class="snap-label">Decision points</span>
-      </div>
-      <div class="snap-item">
-        <span class="snap-val">3</span>
-        <span class="snap-label">Domains tested</span>
-      </div>
-      <div class="snap-item">
-        <span class="snap-val">9</span>
-        <span class="snap-label">Framework questions</span>
-      </div>
-      <div class="snap-item">
-        <span class="snap-val">4</span>
-        <span class="snap-label">Decision types</span>
+    <div class="mini-proof">
+      <div class="k">Research Snapshot</div>
+      <div class="mini-grid">
+        <div class="mini"><div class="val">682</div><div class="lbl">Decision points</div></div>
+        <div class="mini"><div class="val">3</div><div class="lbl">Domains tested</div></div>
+        <div class="mini"><div class="val">9</div><div class="lbl">Framework questions</div></div>
+        <div class="mini"><div class="val">4</div><div class="lbl">Decision types</div></div>
       </div>
     </div>
-  </div>
-
-  <div>
-    <div class="sidebar-section-label">Codebases Analyzed</div>
-    <nav class="sidebar-nav">
+    <div class="nav-title">Codebases Analyzed</div>
+    <div class="side-links">
       <a href="#">⬡ Apache Fineract (banking)</a>
       <a href="#">⬡ OpenMRS (healthcare)</a>
       <a href="#">⬡ Apache OFBiz (supply chain)</a>
-    </nav>
-  </div>
-
-  <div class="sidebar-connect">
-    <div class="sidebar-section-label">Connect</div>
-    <nav class="sidebar-nav">
-      <a href="https://github.com/debcapadona" target="_blank">GitHub</a>
-      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-    </nav>
-  </div>
-</aside>
-
-<!-- MAIN CONTENT -->
-<main class="main">
-
-  <!-- HERO -->
-  <div class="hero-card">
-    <div class="hero-eyebrow">Research · Working Paper · February 2026</div>
-    <h1 class="hero-title">System Cartographer</h1>
-    <p class="hero-thesis">
-      A starting point <strong>designed to be executed by AI</strong>: a structured way for models to analyze enterprise systems, classify decision points, and reason about autonomy, oversight, and constraint—to support the design of next-generation, AI-first systems. It doesn't answer every question. It answers the first one: <strong>where do I even start?</strong>
-    </p>
-    <div class="hero-meta">
-      <span class="badge badge-teal">Status: Active research</span>
-      <span class="hero-date">📅 First published: February 2026</span>
     </div>
-    <div class="hero-links">
-      <a href="#framework" class="btn btn-teal">Read the framework</a>
-      <a href="https://github.com/debcapadona" class="btn btn-outline">GitHub (tool + data)</a>
-      <a href="index.html" class="btn btn-outline">← Main profile</a>
+    <div class="nav-title" style="margin-top:14px;">Connect</div>
+    <div class="side-links">
+      <a href="https://github.com/debcapadona" target="_blank">💻 GitHub</a>
+      <a href="https://linkedin.com/in/debcapadona" target="_blank">💼 LinkedIn</a>
     </div>
-  </div>
+  </aside>
 
-  <!-- WHAT IT DOES -->
-  <div id="framework" class="card">
-    <div class="card-header">
-      <div class="card-icon">⬡</div>
-      <div>
-        <div class="card-title">What This Is — and What It Isn't</div>
-        <div class="card-subtitle">A scaffold, not a solution</div>
+  <div class="main">
+    <div class="hero">
+      <p style="font-size:0.78em;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;margin-bottom:12px;">Research · Working Paper · February 2026</p>
+      <h2>System Cartographer</h2>
+      <p class="subtitle">A starting point <strong>designed to be executed by AI</strong>: a structured way for models to analyze enterprise systems, classify decision points, and reason about autonomy, oversight, and constraint—to support the design of next-generation, AI-first systems. It doesn't answer every question. It answers the first one: <strong>where do I even start?</strong></p>
+      <div class="hero-badges">
+        <span class="chip hot">● Status: Active research</span>
+        <span class="chip">📅 First published: February 2026</span>
       </div>
-    </div>
-    <div class="card-body">
-      <p>
-        When I started analyzing enterprise codebases for AI decision points, the first problem was just knowing what to look for. The nine questions here are what emerged from that process. They're not exhaustive—but they gave me a place to start, and that turned out to be the hard part.
-      </p>
-      <p>
-        <strong>What it is not</strong> — AI managing master data stores (MDM). That space is mature and well-solved.
-      </p>
-      <p>
-        <strong>What it is</strong> — A structured way to reason about where AI autonomy is safe, earnable, or prohibited in a given enterprise system.
-      </p>
-    </div>
-
-    <div class="pillar-grid">
-      <div class="pillar">
-        <div class="pillar-num">01</div>
-        <div class="pillar-title">Classify Decision Points</div>
-        <div class="pillar-desc">Which decisions belong to AI? Which require human judgment? System Cartographer gives AI a structured method to classify them—consistently, across any domain.</div>
-      </div>
-      <div class="pillar">
-        <div class="pillar-num">02</div>
-        <div class="pillar-title">Reason About Autonomy</div>
-        <div class="pillar-desc">Master data dependency, regulatory exposure, reversibility—the framework surfaces the signals that determine where autonomy is safe and where it isn't.</div>
-      </div>
-      <div class="pillar">
-        <div class="pillar-num">03</div>
-        <div class="pillar-title">Define Oversight & Constraint</div>
-        <div class="pillar-desc">Where humans must be in the loop, how is that seam designed into the architecture? System Cartographer structures those answers into deliberate decisions.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- NINE QUESTIONS -->
-  <div id="questions" class="card">
-    <div class="card-header">
-      <div class="card-icon">❓</div>
-      <div>
-        <div class="card-title">The Nine Questions</div>
-        <div class="card-subtitle">Applied to every decision point extracted from a codebase. Questions are weighted — reversibility and regulatory floor carry the most signal.</div>
+      <div class="hero-cta">
+        <a class="btn primary" href="#framework">Read the framework</a>
+        <a class="btn ghost" href="https://github.com/debcapadona" target="_blank">💻 GitHub (tool + data)</a>
+        <a class="btn ghost" href="index.html">← Main profile</a>
       </div>
     </div>
 
-    <div class="questions">
-      <div class="question">
-        <div class="q-num">Q1</div>
-        <div class="q-text"><strong>Reversibility Test</strong> — What are the consequences and how easily can this be undone? Irreversibility is the single strongest argument for human review.</div>
+    <div class="container">
+
+      <!-- WHAT IT IS -->
+      <section class="card" id="framework">
+        <h3>What This Is — and What It Isn't</h3>
+        <p class="muted lead">A scaffold, not a solution</p>
+        <p class="muted" style="margin-top:10px;line-height:1.7;">When I started analyzing enterprise codebases for AI decision points, the first problem was just knowing what to look for. The nine questions here are what emerged from that process. They're not exhaustive—but they gave me a place to start, and that turned out to be the hard part.</p>
+        <div class="rows" style="margin-top:14px;">
+          <div class="row"><div class="icon">✗</div><div><b>What it is not</b><span> — AI managing master data stores (MDM). That space is mature and well-solved.</span></div></div>
+          <div class="row"><div class="icon">✓</div><div><b>What it is</b><span> — A structured way to reason about where AI autonomy is safe, earnable, or prohibited in a given enterprise system.</span></div></div>
+        </div>
+        <div class="pillar-grid">
+          <div class="pillar"><div class="num">01</div><b>Classify Decision Points</b><p>Which decisions belong to AI? Which require human judgment? System Cartographer gives AI a structured method to classify them—consistently, across any domain.</p></div>
+          <div class="pillar"><div class="num">02</div><b>Reason About Autonomy</b><p>Master data dependency, regulatory exposure, reversibility—the framework surfaces the signals that determine where autonomy is safe and where it isn't.</p></div>
+          <div class="pillar"><div class="num">03</div><b>Define Oversight &amp; Constraint</b><p>Where humans must be in the loop, how is that seam designed into the architecture? System Cartographer structures those answers into deliberate decisions.</p></div>
+        </div>
+      </section>
+
+      <!-- NINE QUESTIONS -->
+      <section class="card" id="questions">
+        <h3>The Nine Questions</h3>
+        <p class="muted" style="line-height:1.6;">Applied to every decision point extracted from a codebase. Questions are weighted — reversibility and regulatory floor carry the most signal.</p>
+        <div class="rows">
+          <div class="row"><div class="icon" style="font-size:0.8em;font-weight:900;">Q1</div><div><b>Reversibility Test</b><span> — What are the consequences and how easily can this be undone? Irreversibility is the single strongest argument for human review.</span></div></div>
+          <div class="row"><div class="icon" style="font-size:0.8em;font-weight:900;">Q2</div><div><b>Money Movement Test</b><span> — Does money move as a result of this decision? Financial irreversibility compounds all other risk signals.</span></div></div>
+          <div class="row"><div class="icon" style="font-size:0.8em;font-weight:900;">Q3</div><div><b>Regulatory Test</b><span> — Does law or regulation require a named human in this decision? This is the only permanent wall. Everything else is earnable.</span></div></div>
+          <div class="row"><div class="icon" style="font-size:0.8em;font-weight:900;">Q4</div><div><b>Volume / Pattern Test</b><span> — Is this repeated logic with consistent inputs? High volume + consistency = prime AI candidate.</span></div></div>
+          <div class="row"><div class="icon" style="font-size:0.8em;font-weight:900;">Q5</div><div><b>Override Signal Test</b><span> — Is there an "Override" in the command name? That's historical record of where humans didn't trust automation. Pay attention.</span></div></div>
+          <div class="row"><div class="icon" style="font-size:0.8em;font-weight:900;">Q6</div><div><b>Discretion Test</b><span> — Does this require unmeasured factors—empathy, relationship context, judgment that defies codification? Lowest AI confidence territory.</span></div></div>
+          <div class="row"><div class="icon" style="font-size:0.8em;font-weight:900;">Q7</div><div><b>Anomaly Test</b><span> — Is this detecting a pattern vs. responding to one? Detection is AI-suited. Response to edge-case anomaly requires more caution.</span></div></div>
+          <div class="row"><div class="icon" style="font-size:0.8em;font-weight:900;">Q8</div><div><b>Cascade Test</b><span> — What is the downstream impact scope? A decision that triggers a chain of other decisions needs proportionally higher confidence before autonomous execution.</span></div></div>
+          <div class="row"><div class="icon" style="font-size:0.8em;font-weight:900;">Q9</div><div><b>Feedback Velocity Test</b><span> — How fast does feedback become knowable? Fast feedback = faster confidence curve. Velocity determines the shape of the learning curve, not the destination.</span></div></div>
+        </div>
+      </section>
+
+      <!-- CONFIDENCE MODEL -->
+      <section class="card" id="confidence">
+        <h3>Confidence-Based Handoff Model</h3>
+        <p class="muted" style="line-height:1.6;">Every command gets an AI model prediction before execution. Classification is confidence-based with a learning loop. Human becomes cosigner, not sole decision-maker.</p>
+        <div class="tier-grid">
+          <div class="tier tier-1"><b>✓ Immediate (AI Owns)</b><p>Safe to automate from day one. No known regulatory flag. Fast feedback. Fully reversible.</p></div>
+          <div class="tier tier-2"><b>~ Earned (Collaborative)</b><p>AI recommends after demonstrated confidence across enterprise decision points. Human approves.</p></div>
+          <div class="tier tier-3"><b>⚠ Human Owns</b><p>Regulatory floor, deep discretion, or meaningful downstream cascade. AI provides recommendation only. Human remains accountable signatory.</p></div>
+        </div>
+      </section>
+
+      <!-- VALIDATION -->
+      <section class="card" id="validation">
+        <h3>Cross-Domain Validation</h3>
+        <p class="muted" style="line-height:1.6;">Three production codebases. Three completely different architectural expressions of the same underlying pattern.</p>
+        <div class="stat-grid">
+          <div class="stat"><div class="val">682</div><p>Decision points classified across banking and healthcare</p></div>
+          <div class="stat"><div class="val">2</div><p>Domains fully validated (banking + healthcare)</p></div>
+          <div class="stat"><div class="val">9</div><p>Questions derived from real system analysis, not hypothesis</p></div>
+          <div class="stat"><div class="val">1</div><p>Primary signal: master data dependency predicts decision structure</p></div>
+        </div>
+        <div class="rows" style="margin-top:18px;">
+          <div class="status-row"><span class="badge badge-green">Done</span><div class="txt"><b>Framework defined</b> — Nine questions, four decision types, confidence tier model, feedback velocity as architectural variable.</div></div>
+          <div class="status-row"><span class="badge badge-green">Done</span><div class="txt"><b>Banking and healthcare validated</b> — 682 decision points extracted and classified across Fineract and OpenMRS.</div></div>
+          <div class="status-row"><span class="badge badge-yellow">In progress</span><div class="txt"><b>Supply chain validation</b> — OFBiz analysis in progress. 3,597 service definitions identified. XML extractor in development.</div></div>
+          <div class="status-row"><span class="badge badge-blue">Planned</span><div class="txt"><b>Confidence layer prototype</b> — Actual interface demonstrating real-time confidence scoring at decision execution time.</div></div>
+        </div>
+      </section>
+
+      <!-- COLLAB -->
+      <div class="collab">
+        <h3>This Is What I've Found So Far</h3>
+        <p>System Cartographer is a work in progress. The framework emerged from actually doing the analysis—not from theory—and I'm sure there are gaps, edge cases, and better ways to think about pieces of it that I haven't encountered yet.</p>
+        <p>If you're exploring how to leverage AI to design or build enterprise systems, I'd genuinely love to compare notes. If you try this framework and it works, I want to know. If it doesn't work, I <strong>really</strong> want to know that too.</p>
+        <div class="proof-actions">
+          <a class="btn-dark" href="mailto:your@email.com">✉️ Let's compare notes</a>
+          <a class="btn-outline" href="https://github.com/debcapadona" target="_blank">💻 GitHub</a>
+        </div>
       </div>
-      <div class="question">
-        <div class="q-num">Q2</div>
-        <div class="q-text"><strong>Money Movement Test</strong> — Does money move as a result of this decision? Financial irreversibility compounds all other risk signals.</div>
-      </div>
-      <div class="question">
-        <div class="q-num">Q3 — Regulatory Floor</div>
-        <div class="q-text"><strong>Regulatory Test</strong> — Does law or regulation require a named human in this decision? This is the only permanent wall. Everything else is earnable.</div>
-      </div>
-      <div class="question">
-        <div class="q-num">Q4</div>
-        <div class="q-text"><strong>Volume / Pattern Test</strong> — Is this repeated logic with consistent inputs? High volume + consistency = prime AI candidate.</div>
-      </div>
-      <div class="question">
-        <div class="q-num">Q5 — Override Tell</div>
-        <div class="q-text"><strong>Override Signal Test</strong> — Is there an "Override" in the command name? That's historical record of where humans didn't trust automation. Pay attention.</div>
-      </div>
-      <div class="question">
-        <div class="q-num">Q6</div>
-        <div class="q-text"><strong>Discretion Test</strong> — Does this require unmeasured factors—empathy, relationship context, judgment that defies codification? Lowest AI confidence territory.</div>
-      </div>
-      <div class="question">
-        <div class="q-num">Q7</div>
-        <div class="q-text"><strong>Anomaly Test</strong> — Is this detecting a pattern vs. responding to one? Detection is AI-suited. Response to edge-case anomaly requires more caution.</div>
-      </div>
-      <div class="question">
-        <div class="q-num">Q8</div>
-        <div class="q-text"><strong>Cascade Test</strong> — What is the downstream impact scope? A decision that triggers a chain of other decisions needs proportionally higher confidence before autonomous execution.</div>
-      </div>
-      <div class="question">
-        <div class="q-num">Q9 — Feedback Velocity</div>
-        <div class="q-text"><strong>Feedback Velocity Test</strong> — How fast does feedback become knowable? Fast feedback = faster confidence curve. Velocity determines the shape of the learning curve, not the destination.</div>
-      </div>
+
     </div>
   </div>
-
-  <!-- CONFIDENCE MODEL -->
-  <div id="confidence" class="card">
-    <div class="card-header">
-      <div class="card-icon">📊</div>
-      <div>
-        <div class="card-title">Confidence-Based Handoff Model</div>
-        <div class="card-subtitle">Every command gets an AI model prediction before execution. Classification is confidence-based with a learning loop. Human becomes cosigner, not sole decision-maker.</div>
-      </div>
-    </div>
-
-    <div class="tier-grid">
-      <div class="tier tier-1">
-        <div class="tier-label">✓ Immediate (AI Owns)</div>
-        <div class="tier-desc">Safe to automate from day one. No known regulatory flag. Fast feedback. Fully reversible.</div>
-      </div>
-      <div class="tier tier-2">
-        <div class="tier-label">~ Earned (Collaborative)</div>
-        <div class="tier-desc">AI recommends after demonstrated confidence across enterprise decision points. Human approves.</div>
-      </div>
-      <div class="tier tier-3">
-        <div class="tier-label">⚠ Human Owns</div>
-        <div class="tier-desc">Regulatory floor, deep discretion, or meaningful downstream cascade. AI provides recommendation only. Human remains accountable signatory.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- VALIDATION -->
-  <div id="validation" class="card">
-    <div class="card-header">
-      <div class="card-icon">✅</div>
-      <div>
-        <div class="card-title">Cross-Domain Validation</div>
-        <div class="card-subtitle">Three production codebases. Three completely different architectural expressions of the same underlying pattern.</div>
-      </div>
-    </div>
-
-    <div class="stats-row">
-      <div class="stat-box">
-        <div class="stat-val">682</div>
-        <div class="stat-label">Decision points classified across banking and healthcare</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val">2</div>
-        <div class="stat-label">Domains fully validated (banking + healthcare)</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val">9</div>
-        <div class="stat-label">Questions derived from real system analysis, not hypothesis</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val">1</div>
-        <div class="stat-label">Primary signal: master data dependency predicts decision structure</div>
-      </div>
-    </div>
-
-    <div class="status-list" style="margin-top:20px;">
-      <div class="status-item">
-        <span class="pill pill-green">Done</span>
-        <div><strong>Framework defined</strong> — Nine questions, four decision types, confidence tier model, feedback velocity as architectural variable.</div>
-      </div>
-      <div class="status-item">
-        <span class="pill pill-green">Done</span>
-        <div><strong>Banking and healthcare validated</strong> — 682 decision points extracted and classified across Fineract and OpenMRS.</div>
-      </div>
-      <div class="status-item">
-        <span class="pill pill-yellow">In progress</span>
-        <div><strong>Supply chain validation</strong> — OFBiz analysis in progress. 3,597 service definitions identified. XML extractor in development.</div>
-      </div>
-      <div class="status-item">
-        <span class="pill pill-blue">Planned</span>
-        <div><strong>Confidence layer prototype</strong> — Actual interface demonstrating real-time confidence scoring at decision execution time.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- COLLABORATION -->
-  <div class="collab-block">
-    <div class="card-title">This Is What I've Found So Far</div>
-    <div class="card-body">
-      <p>
-        System Cartographer is a work in progress. The framework emerged from actually doing the analysis—not from theory—and I'm sure there are gaps, edge cases, and better ways to think about pieces of it that I haven't encountered yet.
-      </p>
-      <p>
-        If you're exploring how to leverage AI to design or build enterprise systems, I'd genuinely love to compare notes. If you try this framework and it works, I want to know. If it doesn't work, I <strong>really</strong> want to know that too.
-      </p>
-    </div>
-    <a href="mailto:your@email.com" class="collab-link">Let's compare notes →</a>
-  </div>
-
-</main>
+</div>
 </body>
 </html>
