@@ -437,24 +437,23 @@
     .pill-yellow { background: var(--badge-yellow); color: var(--badge-yellow-text); }
     .pill-blue { background: var(--badge-blue); color: var(--badge-blue-text); }
 
-    @media (max-width: 900px) {
-      :root { --sidebar-width: 130px; }
-      .main { padding: 16px 20px; }
+    @media (max-width: 1024px) {
+      .sidebar { position: relative; width: 100%; height: auto; flex-direction: row; flex-wrap: wrap; gap: 12px; padding: 16px; }
+      .main { margin-left: 0; width: 100%; max-width: 100%; }
+      body { flex-direction: column; }
+      .sidebar-connect { margin-top: 0; }
       .pillar-grid { grid-template-columns: 1fr; }
       .stats-row { grid-template-columns: repeat(2, 1fr); }
-      .snap-val { font-size: 0.9em; }
     }
 
     @media (max-width: 700px) {
-      .sidebar { display: none; }
-      .main { margin-left: 0; padding: 16px; max-width: 100%; }
-      .pillar-grid, .tier-grid, .stats-row { grid-template-columns: 1fr; }
+      .tier-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
       .hero-card { padding: 20px; }
       .card { padding: 18px; }
       .hero-title { font-size: 1.4em; }
       .hero-links { flex-direction: column; }
       .btn { width: 100%; justify-content: center; }
-      .tier-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
