@@ -12,7 +12,7 @@
       --accent1:#7c3aed;--accent2:#06b6d4;--accent3:#f97316;
       --shadow:0 10px 30px rgba(15,23,42,0.10);--shadow2:0 2px 10px rgba(0,0,0,0.06);--radius:18px;
     }
-    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.45;color:var(--ink);background:var(--bg);}
+    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.45;color:var(--ink);background:var(--bg);min-width:700px;}
     .app{display:flex;min-height:100vh}
     .sidebar{width:290px;background:linear-gradient(180deg,var(--sidebar) 0%, var(--sidebar2) 100%);color:#fff;padding:22px 18px;position:fixed;height:100vh;overflow-y:auto;border-right:1px solid rgba(255,255,255,0.08);}
     .brand{padding:14px 12px;border-radius:16px;border:1px solid rgba(255,255,255,0.10);background:rgba(255,255,255,0.04);box-shadow:0 10px 20px rgba(0,0,0,0.12);margin-bottom:14px;}
@@ -38,6 +38,7 @@
     .hero-badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:center;}
     .chip{font-size:0.78em;padding:5px 8px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.06);color:#fff;font-weight:800;backdrop-filter:blur(6px);}
     .chip.hot{border:none;color:#0b1220;background:linear-gradient(135deg,var(--accent2),#a78bfa);}
+    .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px;align-items:center;}
     .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:14px;font-weight:900;font-size:0.82em;text-decoration:none;border:1px solid rgba(255,255,255,0.14);color:#fff;background:rgba(255,255,255,0.06);transition:all .2s ease;backdrop-filter:blur(6px);}
     .btn:hover{transform:translateY(-2px);background:rgba(255,255,255,0.10);}
     .btn.primary{border:none;color:#0b1220;background:linear-gradient(135deg,var(--accent2),#a78bfa);box-shadow:0 12px 30px rgba(6,182,212,0.18);}
@@ -51,15 +52,20 @@
     .row{display:flex;gap:12px;align-items:flex-start;padding:12px 12px;border-radius:16px;border:1px solid var(--line);background:#fff;}
     .row .icon{width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#0b1220;background:linear-gradient(135deg, rgba(124,58,237,0.20), rgba(6,182,212,0.16));border:1px solid rgba(124,58,237,0.18);flex:0 0 34px;}
     .row b{color:#0b1220;}.row span{color:var(--muted);}
+    .proof-panel{border-radius:var(--radius);padding:18px;border:1px solid rgba(124,58,237,0.18);background:linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(6,182,212,0.07) 55%, rgba(249,115,22,0.05) 100%),#ffffff;box-shadow:var(--shadow);position:relative;overflow:hidden;margin-bottom:16px;}
+    .proof-panel::after{content:"";position:absolute;right:-120px;top:-160px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(6,182,212,0.35), rgba(124,58,237,0.0) 60%);opacity:0.9;pointer-events:none;}
     .proof-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;}
     .btn-dark{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:14px;font-weight:900;font-size:0.95em;text-decoration:none;color:#0b1220;border:1px solid rgba(15,23,42,0.10);background:linear-gradient(135deg, rgba(6,182,212,0.16), rgba(124,58,237,0.14));transition:all .2s ease;}
     .btn-dark:hover{transform:translateY(-2px);filter:brightness(1.02);}
     .btn-outline{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:14px;font-weight:900;font-size:0.95em;text-decoration:none;color:#0b1220;border:1px solid rgba(15,23,42,0.14);background:#fff;transition:all .2s ease;}
     .btn-outline:hover{transform:translateY(-2px);background:#f8fafc;}
+    .pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:#f8fafc;color:#0b1220;font-weight:800;font-size:0.85em;text-decoration:none;}
     .badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:0.75em;font-weight:800;}
     .badge-green{background:#d1fae5;color:#065f46;}
     .badge-yellow{background:#fef3c7;color:#92400e;}
     .badge-blue{background:#dbeafe;color:#1e40af;}
+    .badge-purple{background:#f3e8ff;color:#6b21a8;}
     .pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px;}
     .pillar{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:16px;}
     .pillar .num{font-size:0.7em;font-weight:900;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
@@ -83,11 +89,7 @@
     .collab{background:linear-gradient(135deg,rgba(6,182,212,0.08),rgba(124,58,237,0.06)),#fff;border:1px solid rgba(6,182,212,0.22);border-radius:var(--radius);padding:24px 28px;margin-bottom:16px;}
     .collab h3{color:#0f172a;}
     .collab p{color:var(--muted);line-height:1.7;margin-top:10px;font-size:0.95em;}
-    /* RESPONSIVE - matches index.html pattern */
     @media (max-width: 1024px){
-      .sidebar{position:relative;width:100%;height:auto;}
-      .main{margin-left:0;max-width:100%;}
-      .app{flex-direction:column;}
       .container{padding:22px 18px 40px;}
       .hero{padding:28px 18px;}
       .pillar-grid{grid-template-columns:1fr;}
@@ -125,17 +127,17 @@
     <div class="mini-proof">
       <div class="k">Research Snapshot</div>
       <div class="mini-grid">
-        <div class="mini"><div class="val">682</div><div class="lbl">Decision points</div></div>
-        <div class="mini"><div class="val">3</div><div class="lbl">Domains tested</div></div>
+        <div class="mini"><div class="val">682</div><div class="lbl">Decision points validated</div></div>
+        <div class="mini"><div class="val">2</div><div class="lbl">Domains validated</div></div>
         <div class="mini"><div class="val">9</div><div class="lbl">Framework questions</div></div>
-        <div class="mini"><div class="val">4</div><div class="lbl">Decision types</div></div>
+        <div class="mini"><div class="val">70%</div><div class="lbl">Reasoning agreement</div></div>
       </div>
     </div>
     <div class="nav-title">Codebases Analyzed</div>
     <div class="side-links">
       <a href="#">⬡ Apache Fineract (banking)</a>
       <a href="#">⬡ OpenMRS (healthcare)</a>
-      <a href="#">⬡ Apache OFBiz (supply chain)</a>
+      <a href="#">⬡ Apache OFBiz (in research)</a>
     </div>
     <div class="nav-title" style="margin-top:14px;">Connect</div>
     <div class="side-links">
@@ -145,27 +147,25 @@
 
   <div class="main">
     <div class="hero">
-      <p style="font-size:0.78em;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;margin-bottom:12px;">Research · Working Paper · February 2026</p>
-      <h2>System Decision Mapping</h2>
-      <p class="subtitle" style="margin-top:8px;">A starting point <strong>designed to be executed by AI</strong>: a structured way for models to analyze enterprise systems, classify decision points, and reason about autonomy, oversight, and constraint—to support the design of next-generation, AI-first systems. It doesn't answer every question. It answers the first one: <strong>where do I even start?</strong></p>
-      <p style="margin-top:10px;margin-bottom:14px;font-size:0.92em;color:#94a3b8;display:block;width:100%;">System Decision Mapping produces structure, not decisions — a map of where decisions exist in a system, not a system that makes them.</p>
-      <div class="hero-badges">
+    <p style="font-size:0.78em;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;margin-bottom:12px;">Research · Working Paper · February 2026</p>
+    <h2>System Decision Mapping</h2>
+    <p class="subtitle" style="margin-top:8px;">A framework for <strong>predicting AI autonomy boundaries in enterprise systems</strong> — before reading a line of code. Systems governed by externally enforced compliance standards exhibit predictable decision architectures. <strong>The governing standard predicts the structure.</strong></p>
+    <p style="margin-top:10px;margin-bottom:14px;font-size:0.92em;color:#94a3b8;display:block;width:100%;">System Decision Mapping produces structure, not decisions — a map of where decisions exist in a system, not a system that makes them.</p>
+    <div class="hero-badges">
         <span class="chip hot">● Active research</span>
         <span class="chip">📅 First published: February 2026</span>
         <a class="btn primary" href="#framework">Read the framework</a>
         <a class="btn ghost" href="index.html">← Main profile</a>
-      </div>
+    </div>
     </div>
 
     <div class="container">
 
-      <!-- AUDIENCE + ORIENTATION -->
-      <div style="padding:10px 14px;margin-bottom:12px;background:#eef2f7;border-radius:14px;border:1px solid #d8dfe8;">
-        <p class="muted" style="font-size:0.93em;line-height:1.6;margin-bottom:6px;"><strong style="color:#0b1220;">Target Audience:</strong> People designing, building, or governing AI-enabled enterprise systems.</p>
-        <p class="muted" style="font-size:0.93em;line-height:1.6;"><strong style="color:#0b1220;">Purpose:</strong> Most AI frameworks assume you already know where decisions live. System Decision Mapping helps you find them first.</p>
-      </div>
+    <div style="padding:10px 14px;margin-bottom:12px;background:#eef2f7;border-radius:14px;border:1px solid #d8dfe8;">
+    <p class="muted" style="font-size:0.93em;line-height:1.6;margin-bottom:6px;"><strong style="color:#0b1220;">Target Audience:</strong> People designing, building, or governing AI-enabled enterprise systems.</p>
+    <p class="muted" style="font-size:0.93em;line-height:1.6;"><strong style="color:#0b1220;">Purpose:</strong> Most AI frameworks assume you already know where decisions live. System Decision Mapping helps you find them first.</p>
+    </div>
 
-      <!-- WHAT IT IS -->
       <section class="card" id="framework">
         <h3>What This Is — and What It Isn't</h3>
         <p class="muted lead">A scaffold, not a solution</p>
@@ -182,19 +182,45 @@
         </div>
       </section>
 
-      <!-- FOUR DECISION TYPES -->
       <section class="card" id="decision-types">
         <h3>Four Emergent Decision Types</h3>
         <p class="muted" style="line-height:1.6;">These types weren't designed in advance — they emerged from analyzing real production codebases. Every decision point extracted from a codebase falls into one of these four categories.</p>
         <div class="rows" style="margin-top:14px;">
-          <div class="row"><div class="icon" style="font-size:0.75em;font-weight:900;">T1</div><div><b>Mapping Decisions</b><span> — Local concept mapped to external standard. High volume. AI-learnable. Fast feedback. Prime automation candidate.</span><div style="margin-top:6px;font-size:0.8em;color:var(--accent2);font-weight:800;">Signal: High volume + consistent inputs</div></div></div>
-          <div class="row"><div class="icon" style="font-size:0.75em;font-weight:900;">T2</div><div><b>Drift Correction Decisions</b><span> — When local practice diverges from governing standard over time. AI-detectable. Human-correctable. Feedback velocity is the key variable.</span><div style="margin-top:6px;font-size:0.8em;color:var(--accent2);font-weight:800;">Signal: Behavioral shift over large sample</div></div></div>
-          <div class="row"><div class="icon" style="font-size:0.75em;font-weight:900;">T3</div><div><b>Retirement Decisions</b><span> — When a governed standard code is deprecated. Cascade impact typically high. Human review warranted. AI can identify and stage, not decide.</span><div style="margin-top:6px;font-size:0.8em;color:var(--accent2);font-weight:800;">Signal: Cascade scope + irreversibility</div></div></div>
-          <div class="row"><div class="icon" style="font-size:0.75em;font-weight:900;">T4</div><div><b>Override Decisions</b><span> — Where the standard doesn't fit the situation. Discretion required. Lowest AI confidence. Typically the most likely to require ongoing human sign-off.</span><div style="margin-top:6px;font-size:0.8em;color:var(--accent2);font-weight:800;">Signal: "Override / Manual / Undo" in command name</div></div></div>
+          <div class="row">
+            <div class="icon" style="font-size:0.75em;font-weight:900;">T1</div>
+            <div>
+              <b>Mapping Decisions</b>
+              <span> — Local concept mapped to external standard. High volume. AI-learnable. Fast feedback. Prime automation candidate.</span>
+              <div style="margin-top:6px;font-size:0.8em;color:var(--accent2);font-weight:800;">Signal: High volume + consistent inputs</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="icon" style="font-size:0.75em;font-weight:900;">T2</div>
+            <div>
+              <b>Drift Correction Decisions</b>
+              <span> — When local practice diverges from governing standard over time. AI-detectable. Human-correctable. Feedback velocity is the key variable.</span>
+              <div style="margin-top:6px;font-size:0.8em;color:var(--accent2);font-weight:800;">Signal: Behavioral shift over large sample</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="icon" style="font-size:0.75em;font-weight:900;">T3</div>
+            <div>
+              <b>Retirement Decisions</b>
+              <span> — When a governed standard code is deprecated. Cascade impact typically high. Human review warranted. AI can identify and stage, not decide.</span>
+              <div style="margin-top:6px;font-size:0.8em;color:var(--accent2);font-weight:800;">Signal: Cascade scope + irreversibility</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="icon" style="font-size:0.75em;font-weight:900;">T4</div>
+            <div>
+              <b>Override Decisions</b>
+              <span> — Where the standard doesn't fit the situation. Discretion required. Lowest AI confidence. Typically the most likely to require ongoing human sign-off.</span>
+              <div style="margin-top:6px;font-size:0.8em;color:var(--accent2);font-weight:800;">Signal: "Override / Manual / Undo" in command name</div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- NINE QUESTIONS -->
       <section class="card" id="questions">
         <h3>The Nine Questions</h3>
         <p class="muted" style="line-height:1.6;">Applied to every decision point extracted from a codebase. Questions are weighted — reversibility and regulatory floor carry the most signal.</p>
@@ -220,7 +246,6 @@
         <p class="muted" style="margin-top:12px;font-size:0.85em;line-height:1.6;"><strong>Weighting note:</strong> Questions are not equal. Reversibility (Q1) and regulatory requirement (Q3) function as hard floors — a single "yes" on either overrides all other signals. Money movement (Q2) compounds irreversibility. Volume/pattern (Q4) and feedback velocity (Q9) are the primary AI-positive signals. All others are confidence modifiers.</p>
       </section>
 
-      <!-- CONFIDENCE MODEL -->
       <section class="card" id="confidence">
         <h3>Confidence-Based Handoff Model</h3>
         <p class="muted" style="line-height:1.6;">Every command gets an AI model prediction before execution. Classification is confidence-based with a learning loop. Human becomes cosigner, not sole decision-maker.</p>
@@ -231,7 +256,6 @@
         </div>
       </section>
 
-      <!-- MONITORING & LEARNING -->
       <section class="card" id="monitoring">
         <h3>Monitoring, Learning & Time Dynamics</h3>
         <p class="muted" style="line-height:1.6;">Autonomy is not a one-time classification. It is earned, monitored, and can be revoked. Feedback velocity determines how fast that earning can happen — and how fast revocation must happen when things go wrong.</p>
@@ -240,10 +264,10 @@
           <div class="row"><div class="icon">↺</div><div><b>Learning Loops</b><span> — Confidence adjusts over time as outcomes accumulate. A decision point that starts in "Earned / Collaborative" can graduate to "AI Owns" — or get demoted to "Human Owns" — based on observed outcomes. The tier assignment is a starting point, not a permanent label.</span></div></div>
           <div class="row"><div class="icon">⚠</div><div><b>Drift Detection</b><span> — When AI behavior diverges from expected patterns over a large sample, that is a T2 Drift Correction event. The system flags it; a human corrects it. Detection is AI-suited. The correction decision is not.</span></div></div>
           <div class="row"><div class="icon">⛔</div><div><b>Rollback & Containment</b><span> — When confidence drops below threshold, autonomy is automatically constrained. Execution reverts to the next lower confidence tier until confidence is re-established. The tier model is the enforcement mechanism, not a separate control layer.</span></div></div>
+          <div class="row"><div class="icon">🔄</div><div><b>Model Upgrade Cadence</b><span> — AI model capabilities are improving roughly every 3–4 months. Autonomy tier classifications made at implementation are not permanent. A structured re-evaluation against the decision inventory is warranted on each model upgrade cycle. This is planned research.</span></div></div>
         </div>
       </section>
 
-      <!-- NIST MAPPING -->
       <section class="card" id="nist">
         <h3>NIST AI RMF → System Decision Mapping (Operational Use)</h3>
         <p class="muted" style="line-height:1.6;">This mapping shows how System Decision Mapping can be used as structured input—by humans or AI—to identify the decision landscape implicit in the NIST AI Risk Management Framework, providing a concrete place to start without defining policy or permissions.</p>
@@ -269,28 +293,40 @@
               <tr style="border-bottom:1px solid var(--line);background:#fafbfc;">
                 <td style="padding:12px;font-weight:800;color:#0b1220;">How should AI risk be assessed?</td>
                 <td style="padding:12px;color:var(--muted);line-height:1.5;">NIST MEASURE requires risk assessment but leaves methods open</td>
-                <td style="padding:12px;"><span style="background:#d1fae5;color:#065f46;border-radius:999px;padding:3px 10px;font-size:0.82em;font-weight:800;display:inline-block;margin-bottom:4px;">MEASURE</span><br><span style="background:#fef3c7;color:#92400e;border-radius:999px;padding:3px 10px;font-size:0.82em;font-weight:800;display:inline-block;">MANAGE</span></td>
+                <td style="padding:12px;">
+                  <span style="background:#d1fae5;color:#065f46;border-radius:999px;padding:3px 10px;font-size:0.82em;font-weight:800;display:inline-block;margin-bottom:4px;">MEASURE</span><br>
+                  <span style="background:#fef3c7;color:#92400e;border-radius:999px;padding:3px 10px;font-size:0.82em;font-weight:800;display:inline-block;">MANAGE</span>
+                </td>
                 <td style="padding:12px;font-weight:800;color:#0b1220;">Nine Evaluation Questions</td>
                 <td style="padding:12px;color:var(--muted);line-height:1.5;">Provides a repeatable way to examine each decision point for reversibility, discretion, regulation, and impact</td>
               </tr>
               <tr style="border-bottom:1px solid var(--line);">
                 <td style="padding:12px;font-weight:800;color:#0b1220;">Who is accountable for AI behavior?</td>
                 <td style="padding:12px;color:var(--muted);line-height:1.5;">NIST GOVERN establishes accountability as a requirement</td>
-                <td style="padding:12px;"><span style="background:#f3e8ff;color:#6b21a8;border-radius:999px;padding:3px 10px;font-size:0.82em;font-weight:800;display:inline-block;margin-bottom:4px;">GOVERN</span><br><span style="background:#fef3c7;color:#92400e;border-radius:999px;padding:3px 10px;font-size:0.82em;font-weight:800;display:inline-block;">MANAGE</span></td>
+                <td style="padding:12px;">
+                  <span style="background:#f3e8ff;color:#6b21a8;border-radius:999px;padding:3px 10px;font-size:0.82em;font-weight:800;display:inline-block;margin-bottom:4px;">GOVERN</span><br>
+                  <span style="background:#fef3c7;color:#92400e;border-radius:999px;padding:3px 10px;font-size:0.82em;font-weight:800;display:inline-block;">MANAGE</span>
+                </td>
                 <td style="padding:12px;font-weight:800;color:#0b1220;">Confidence-Based Handoff Model</td>
                 <td style="padding:12px;color:var(--muted);line-height:1.5;">Defines when AI may act, when it must defer, and when humans retain ownership — with clear thresholds</td>
               </tr>
               <tr style="border-bottom:1px solid var(--line);background:#fafbfc;">
                 <td style="padding:12px;font-weight:800;color:#0b1220;">What happens when confidence is unclear?</td>
                 <td style="padding:12px;color:var(--muted);line-height:1.5;">NIST does not define a default posture</td>
-                <td style="padding:12px;"><span style="background:#f3e8ff;color:#6b21a8;border-radius:999px;padding:3px 10px;font-size:0.82em;font-weight:800;display:inline-block;margin-bottom:4px;">GOVERN</span><br><span style="background:#fef3c7;color:#92400e;border-radius:999px;padding:3px 10px;font-size:0.82em;font-weight:800;display:inline-block;">MANAGE</span></td>
+                <td style="padding:12px;">
+                  <span style="background:#f3e8ff;color:#6b21a8;border-radius:999px;padding:3px 10px;font-size:0.82em;font-weight:800;display:inline-block;margin-bottom:4px;">GOVERN</span><br>
+                  <span style="background:#fef3c7;color:#92400e;border-radius:999px;padding:3px 10px;font-size:0.82em;font-weight:800;display:inline-block;">MANAGE</span>
+                </td>
                 <td style="padding:12px;font-weight:800;color:#0b1220;">Low-AI-Confidence Defaults</td>
                 <td style="padding:12px;color:var(--muted);line-height:1.5;">Applies a simple rule: if confidence can't be established, the decision remains human-owned</td>
               </tr>
               <tr style="border-bottom:1px solid var(--line);">
                 <td style="padding:12px;font-weight:800;color:#0b1220;">How do we monitor and respond to issues over time?</td>
                 <td style="padding:12px;color:var(--muted);line-height:1.5;">NIST calls for monitoring and response</td>
-                <td style="padding:12px;"><span style="background:#d1fae5;color:#065f46;border-radius:999px;padding:3px 10px;font-size:0.82em;font-weight:800;display:inline-block;margin-bottom:4px;">MEASURE</span><br><span style="background:#fef3c7;color:#92400e;border-radius:999px;padding:3px 10px;font-size:0.82em;font-weight:800;display:inline-block;">MANAGE</span></td>
+                <td style="padding:12px;">
+                  <span style="background:#d1fae5;color:#065f46;border-radius:999px;padding:3px 10px;font-size:0.82em;font-weight:800;display:inline-block;margin-bottom:4px;">MEASURE</span><br>
+                  <span style="background:#fef3c7;color:#92400e;border-radius:999px;padding:3px 10px;font-size:0.82em;font-weight:800;display:inline-block;">MANAGE</span>
+                </td>
                 <td style="padding:12px;font-weight:800;color:#0b1220;">Feedback Velocity &amp; Learning Loops</td>
                 <td style="padding:12px;color:var(--muted);line-height:1.5;">Limits autonomy based on how quickly decision outcomes can be observed and corrected</td>
               </tr>
@@ -303,16 +339,17 @@
         </div>
       </section>
 
-      <!-- VALIDATION -->
+      <!-- VALIDATION — THREE CHANGES HERE -->
       <section class="card" id="validation">
         <h3>Cross-Domain Validation</h3>
-        <p class="muted" style="line-height:1.6;">Three production codebases. Three completely different architectural expressions of the same underlying pattern.</p>
+        <p class="muted" style="line-height:1.6;">Predictions derived from standards documentation — SWIFT CBPR+, ISO 20022, BMC Medical Informatics (2020), CMS ICD-10 guidelines — then tested against real codebase analysis. The governing standard predicted the decision structure before the code was read.</p>
         <div class="stat-grid">
           <div class="stat"><div class="val">682</div><p>Decision points classified across banking and healthcare</p></div>
-          <div class="stat"><div class="val">3</div><p>Domains analyzed (banking, healthcare, supply chain)</p></div>
-          <div class="stat"><div class="val">9</div><p>Questions derived from real system analysis, not hypothesis</p></div>
-          <div class="stat"><div class="val">1</div><p>Primary signal: master data dependency predicts decision structure</p></div>
+          <div class="stat"><div class="val">2</div><p>Domains validated (banking, healthcare)</p></div>
+          <div class="stat"><div class="val">&lt;5%</div><p>Max tier prediction delta vs. source-derived predictions</p></div>
+          <div class="stat"><div class="val">70%</div><p>Agreement between heuristic and reasoning-based classification</p></div>
         </div>
+
         <div style="overflow-x:auto;margin-top:20px;">
           <table style="width:100%;border-collapse:collapse;font-size:0.88em;">
             <thead>
@@ -332,7 +369,7 @@
                 <td style="padding:12px;color:var(--muted);">@CommandType Java annotations</td>
                 <td style="padding:12px;color:var(--muted);">SWIFT, ISO 20022, NACHA</td>
                 <td style="padding:12px;font-weight:800;color:#0b1220;">416</td>
-                <td style="padding:12px;"><span class="badge badge-green">✓ Complete</span></td>
+                <td style="padding:12px;"><span class="badge badge-green">✓ Validated</span></td>
               </tr>
               <tr style="border-bottom:1px solid var(--line);background:#fafbfc;">
                 <td style="padding:12px;font-weight:800;color:#0b1220;">OpenMRS</td>
@@ -340,34 +377,41 @@
                 <td style="padding:12px;color:var(--muted);">@Authorized service methods</td>
                 <td style="padding:12px;color:var(--muted);">ICD-10, SNOMED, LOINC</td>
                 <td style="padding:12px;font-weight:800;color:#0b1220;">266</td>
-                <td style="padding:12px;"><span class="badge badge-green">✓ Complete</span></td>
+                <td style="padding:12px;"><span class="badge badge-green">✓ Validated</span></td>
               </tr>
               <tr style="border-bottom:1px solid var(--line);">
                 <td style="padding:12px;font-weight:800;color:#0b1220;">Apache OFBiz</td>
                 <td style="padding:12px;color:var(--muted);">Supply chain / ERP</td>
                 <td style="padding:12px;color:var(--muted);">XML service definitions</td>
                 <td style="padding:12px;color:var(--muted);">GS1, UNSPSC, HS codes</td>
-                <td style="padding:12px;font-weight:800;color:#0b1220;">3,597</td>
-                <td style="padding:12px;"><span class="badge badge-yellow">⟳ In progress</span></td>
+                <td style="padding:12px;font-weight:800;color:#0b1220;">3,493</td>
+                <td style="padding:12px;"><span class="badge badge-purple">⟳ In research</span></td>
               </tr>
             </tbody>
           </table>
         </div>
+
+        <div style="margin-top:16px;padding:16px 18px;background:#f0fdf4;border:1px solid #86efac;border-radius:12px;">
+          <div style="font-size:0.72em;font-weight:900;color:#065f46;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Why Supply Chain Is In Research</div>
+          <p style="font-size:0.92em;line-height:1.65;color:#0b1220;">Banking and healthcare standards (SWIFT, ICD-10) carry mandatory compliance enforcement — messages are rejected when they don't conform. GS1 and UNSPSC are voluntary adoption standards. The framework's predictive signal is not the existence of a governing standard but the enforcement mechanism behind it. Supply chain requires a separate evaluation methodology and is planned research.</p>
+        </div>
+
         <div class="rows" style="margin-top:18px;">
           <div class="row"><div class="icon">🔬</div><div><b>OpenMRS vocabulary tell</b><span> — void/purge (irreversible), retire (archive), unvoid/unretire (override tells). Domain language encodes the autonomy classification directly.</span></div></div>
           <div class="row"><div class="icon">💡</div><div><b>Fineract edge case contrast</b><span> — LoanGoodwillCredit (5% confidence): discretionary exception, lowest-confidence territory. UpdateLoanDelinquencyBucket (85%): pure pattern matching, prime AI candidate. Same system, opposite profiles.</span></div></div>
           <div class="row"><div class="icon">⏱</div><div><b>Feedback velocity contrast</b><span> — Loan repayment feedback: days. Healthcare ICD-10 coding drift: months to audit cycles. Same architecture. Different confidence curve shapes. Patience is an architectural variable.</span></div></div>
         </div>
+
         <div class="rows" style="margin-top:18px;">
           <div class="status-row"><span class="badge badge-green">Done</span><div class="txt"><b>Framework defined</b> — Nine questions, four decision types, confidence tier model, feedback velocity as architectural variable.</div></div>
-          <div class="status-row"><span class="badge badge-green">Done</span><div class="txt"><b>Banking and healthcare validated</b> — 682 decision points extracted and classified across Fineract and OpenMRS.</div></div>
-          <div class="status-row"><span class="badge badge-yellow">In progress</span><div class="txt"><b>Supply chain validation</b> — OFBiz analysis in progress. 3,597 service definitions identified. XML extractor in development.</div></div>
-          <div class="status-row"><span class="badge badge-blue">Planned</span><div class="txt"><b>Confidence layer prototype</b> — Actual interface demonstrating real-time confidence scoring at decision execution time.</div></div>
-          <div class="status-row"><span class="badge badge-blue">Planned</span><div class="txt"><b>Fourth domain validation</b> — Testing framework against a codebase outside banking, healthcare, and supply chain.</div></div>
+          <div class="status-row"><span class="badge badge-green">Done</span><div class="txt"><b>Banking and healthcare validated</b> — 682 decision points. Predictions sourced from SWIFT CBPR+ and ICD-10 documentation independently. All tier predictions within 5% of actuals.</div></div>
+          <div class="status-row"><span class="badge badge-green">Done</span><div class="txt"><b>Reasoning baseline established</b> — 416 Fineract decision points classified by AI reasoning (not heuristics) on February 21, 2026. 70.2% agreement with heuristic classifier. Baseline stored for next model version comparison.</div></div>
+          <div class="status-row"><span class="badge badge-purple">In research</span><div class="txt"><b>Supply chain &amp; IAM methodology</b> — OFBiz extracted (3,493 business decisions). Voluntary-standard and policy-governed decision architectures require separate evaluation methodology. Planned extension.</div></div>
+          <div class="status-row"><span class="badge badge-blue">Planned</span><div class="txt"><b>Model upgrade assessment protocol</b> — Structured methodology for re-evaluating autonomy tier classifications when AI model versions change. AI capabilities are improving every 3–4 months; tier classifications made at implementation are not permanent.</div></div>
+          <div class="status-row"><span class="badge badge-blue">Planned</span><div class="txt"><b>Fourth domain validation</b> — Testing framework against a codebase with mandatory external standard outside banking and healthcare.</div></div>
         </div>
       </section>
 
-      <!-- THE TOOL -->
       <section class="card" id="tool">
         <h3>The Tool: Decision-extractor</h3>
         <p class="muted" style="line-height:1.6;">A static analysis tool that extracts and classifies AI decision points from enterprise codebases. The tool is evidence for the framework — not the contribution itself.</p>
@@ -375,13 +419,13 @@
           <div class="row"><div class="icon">🔍</div><div><b>What it does</b><span> — Scans Java codebases and XML service definitions for decision point patterns. Applies the nine questions as a scoring algorithm. Outputs structured JSON with confidence tier classifications.</span></div></div>
           <div class="row"><div class="icon">🏗</div><div><b>Architecture patterns supported</b><span> — Annotation-driven command patterns (Fineract), privilege-based service authorization (OpenMRS), XML servicedef files (OFBiz). Three different patterns, one extractor.</span></div></div>
           <div class="row"><div class="icon">📤</div><div><b>Output</b><span> — Decision point inventory with domain classification, autonomy tier, feedback velocity rating, and regulatory floor flags. Human-readable and machine-readable.</span></div></div>
+          <div class="row"><div class="icon">🧪</div><div><b>Test suite</b><span> — A reasoning-based classifier runs the full decision inventory against the current AI model version. Output is a dated, model-stamped baseline file. Designed to be re-run on each model upgrade to measure capability drift against real enterprise decision points.</span></div></div>
         </div>
       </section>
 
-      <!-- COLLAB -->
       <div class="collab">
         <h3>Feedback Welcome</h3>
-        <p>System Decision Mapping documents a recurring pattern observed across the production systems analyzed so far. The goal is to make those patterns explicit so they can be tested, challenged, and improved. If you apply this to your own systems, I'd love to compare notes—especially on failure cases and edge conditions.</p>
+        <p>System Decision Mapping documents a recurring pattern observed across the production systems analyzed so far. The goal is to make those patterns explicit so they can be tested, challenged, and improved. If you apply this to your own systems, I'd love to compare notes—especially on failure cases, edge conditions, and domains where the enforcement mechanism distinction holds or breaks.</p>
         <div class="proof-actions">
           <a class="btn-dark" href="mailto:system.cartographer@gmail.com">✉️ Send Feedback</a>
           <a class="btn-outline" href="https://www.linkedin.com/in/debcapadona/" target="_blank">💼 LinkedIn</a>
