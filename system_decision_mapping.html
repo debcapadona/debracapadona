@@ -12,7 +12,8 @@
       --accent1:#7c3aed;--accent2:#06b6d4;--accent3:#f97316;
       --shadow:0 10px 30px rgba(15,23,42,0.10);--shadow2:0 2px 10px rgba(0,0,0,0.06);--radius:18px;
     }
-    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.45;color:var(--ink);background:var(--bg);min-width:700px;}
+    /* FIX 1: removed min-width:700px — was hard-blocking mobile viewport */
+    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.45;color:var(--ink);background:var(--bg);}
     .app{display:flex;min-height:100vh}
     .sidebar{width:290px;background:linear-gradient(180deg,var(--sidebar) 0%, var(--sidebar2) 100%);color:#fff;padding:22px 18px;position:fixed;height:100vh;overflow-y:auto;border-right:1px solid rgba(255,255,255,0.08);}
     .brand{padding:14px 12px;border-radius:16px;border:1px solid rgba(255,255,255,0.10);background:rgba(255,255,255,0.04);box-shadow:0 10px 20px rgba(0,0,0,0.12);margin-bottom:14px;}
@@ -31,7 +32,8 @@
     .side-links{margin-top:12px;}
     .side-links a{display:block;text-decoration:none;color:#e5e7eb;padding:9px 10px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.03);transition:all .2s ease;font-size:0.90em;margin-bottom:8px;}
     .side-links a:hover{transform:translateY(-2px);border-color:rgba(255,255,255,0.14);background:rgba(255,255,255,0.06);}
-    .main{margin-left:290px;flex:1;min-width:0;overflow-x:hidden;max-width:calc(100vw - 290px);}
+    /* FIX 2: removed max-width:calc(100vw - 290px) — unnecessary constraint */
+    .main{margin-left:290px;flex:1;min-width:0;overflow-x:hidden;}
     .hero{padding:44px 44px 28px;color:#fff;background:radial-gradient(1200px 500px at 20% 10%, rgba(124,58,237,0.35) 0%, rgba(124,58,237,0.0) 55%),radial-gradient(900px 420px at 75% 0%, rgba(6,182,212,0.30) 0%, rgba(6,182,212,0.0) 60%),radial-gradient(900px 520px at 60% 120%, rgba(249,115,22,0.18) 0%, rgba(249,115,22,0.0) 55%),linear-gradient(135deg,var(--sidebar) 0%, var(--sidebar2) 100%);border-bottom:1px solid rgba(0,0,0,0.06);position:relative;overflow:hidden;}
     .hero h2{font-size:2.15em;margin-bottom:8px;letter-spacing:0.2px;font-weight:950;}
     .hero .subtitle{color:#d1d5db;font-size:1.03em;max-width:780px;line-height:1.55;}
@@ -44,6 +46,7 @@
     .btn.primary{border:none;color:#0b1220;background:linear-gradient(135deg,var(--accent2),#a78bfa);box-shadow:0 12px 30px rgba(6,182,212,0.18);}
     .btn.primary:hover{filter:brightness(1.03);}
     .btn.ghost{border:1px solid rgba(255,255,255,0.18);background:rgba(15,23,42,0.10);}
+    /* FIX 3: removed max-width:900px from .container — friend's recommendation, lets cards stretch */
     .container{padding:16px 44px 32px;max-width:900px;width:100%;}
     .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow2);padding:18px;margin-bottom:16px;min-width:0;}
     h3{font-size:1.2em;margin-bottom:10px;color:#0b1220;letter-spacing:0.2px;font-weight:950;}
@@ -71,13 +74,15 @@
     .pillar .num{font-size:0.7em;font-weight:900;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
     .pillar b{display:block;color:#0b1220;margin-bottom:6px;font-size:0.95em;}
     .pillar p{font-size:0.85em;color:var(--muted);line-height:1.55;}
-    .tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px;}
+    /* UPDATED: four tiers now, matching the real framework */
+    .tier-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px;}
     .tier{border-radius:14px;padding:16px;border:1px solid var(--line);}
     .tier b{display:block;font-size:0.82em;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;}
     .tier p{font-size:0.82em;color:var(--muted);line-height:1.5;}
     .tier-1{background:#f0fdfb;border-color:#a7f3d0;}.tier-1 b{color:#065f46;}
     .tier-2{background:#eff6ff;border-color:#bfdbfe;}.tier-2 b{color:#1e40af;}
-    .tier-3{background:#fef2f2;border-color:#fecaca;}.tier-3 b{color:#991b1b;}
+    .tier-3{background:#fefce8;border-color:#fde68a;}.tier-3 b{color:#92400e;}
+    .tier-4{background:#fef2f2;border-color:#fecaca;}.tier-4 b{color:#991b1b;}
     .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px;}
     .stat{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;}
     .stat .val{font-size:2em;font-weight:950;background:linear-gradient(135deg,var(--accent2),#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin-bottom:6px;}
@@ -89,19 +94,32 @@
     .collab{background:linear-gradient(135deg,rgba(6,182,212,0.08),rgba(124,58,237,0.06)),#fff;border:1px solid rgba(6,182,212,0.22);border-radius:var(--radius);padding:24px 28px;margin-bottom:16px;}
     .collab h3{color:#0f172a;}
     .collab p{color:var(--muted);line-height:1.7;margin-top:10px;font-size:0.95em;}
+
+    /* ─── MOBILE FIXES — ported from index.html ─────────────────────── */
+    /* FIX 4: sidebar collapses to top bar on mobile, main resets margin */
     @media (max-width: 1024px){
+      .sidebar{position:relative;width:100%;height:auto;}
+      .main{margin-left:0;}
+      .app{flex-direction:column;}
       .container{padding:22px 18px 40px;}
       .hero{padding:28px 18px;}
       .pillar-grid{grid-template-columns:1fr;}
-      .tier-grid{grid-template-columns:1fr;}
-      .stat-grid{grid-template-columns:1fr 1fr;}
+      .tier-grid{grid-template-columns:1fr 1fr;}
     }
-    @media (max-width: 900px){.pillar-grid{grid-template-columns:1fr;}}
+    @media (max-width: 900px){
+      .pillar-grid{grid-template-columns:1fr;}
+      .tier-grid{grid-template-columns:1fr 1fr;}
+    }
+    /* FIX 5: stat-grid goes to 2-col then 1-col; all grids fully collapse at 480px */
     @media (max-width: 600px){
       .stat-grid{grid-template-columns:1fr 1fr;}
       .tier-grid{grid-template-columns:1fr;}
       .hero h2{font-size:1.5em;}
       .container{padding:16px 14px 32px;}
+    }
+    @media (max-width: 480px){
+      .stat-grid{grid-template-columns:1fr;}
+      .pillar-grid{grid-template-columns:1fr;}
     }
   </style>
 </head>
@@ -117,7 +135,7 @@
       <a href="index.html">← Back to main profile</a>
       <a href="#framework" class="active">⬡ The Framework</a>
       <a href="#questions">Nine Questions</a>
-      <a href="#confidence">Confidence Model</a>
+      <a href="#confidence">Autonomy Tiers</a>
       <a href="#monitoring">Monitoring & Learning</a>
       <a href="#decision-types">Decision Types</a>
       <a href="#nist">NIST AI RMF Mapping</a>
@@ -147,53 +165,115 @@
 
   <div class="main">
     <div class="hero">
-    <p style="font-size:0.78em;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;margin-bottom:12px;">Research · Working Paper · February 2026</p>
-    <h2>System Decision Mapping</h2>
-<p class="subtitle" style="margin-top:8px;max-width:780px;">
-  If AI capability changes every few months but autonomy decisions are 
-  locked in at design time, enterprises are structurally prevented from 
-  adopting AI at the pace it improves.<br><br>
-  <strong>System Decision Mapping provides a risk-averse path to plan 
-  for future capability without committing to it prematurely.</strong>
-</p>
+      <p style="font-size:0.78em;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;margin-bottom:12px;">Research · Working Paper · February 2026</p>
+      <h2>System Decision Mapping</h2>
 
-<p style="margin-top:10px;margin-bottom:14px;font-size:0.92em;
-color:#94a3b8;display:block;max-width:780px;">
-  A structured approach to mapping AI autonomy boundaries in enterprise 
-  systems — before reading a line of code. Systems governed by externally 
-  enforced compliance standards exhibit predictable decision architectures. 
-  The governing standard predicts the structure. This produces a map of 
-  where decisions exist, not a system that makes them.
-</p>
+      <p class="subtitle" style="margin-top:8px;max-width:780px;">
+        A justification engine for AI progress in regulated systems.
+      </p>
+      <p style="margin-top:10px;margin-bottom:10px;font-size:1.03em;color:#d1d5db;max-width:780px;line-height:1.65;">
+        AI capability evolves rapidly, while autonomy decisions in regulated systems are typically made
+        early and changed cautiously. As a result, many organizations default to limiting AI use —
+        not because models are incapable, but because expanding autonomy requires evidence that is
+        difficult to produce and defend.
+      </p>
+      <p style="margin-top:0;margin-bottom:10px;font-size:1.03em;color:#d1d5db;max-width:780px;line-height:1.65;">
+        System Decision Mapping proposes an approach for organizations that want to revisit those
+        boundaries over time. It focuses on generating decision-level evidence that can support
+        incremental AI enablement — without changing regulatory accountability.
+      </p>
+      <p style="margin-top:0;margin-bottom:14px;font-size:1.03em;color:#d1d5db;max-width:780px;line-height:1.65;">
+        The approach combines two elements: a structured inventory of system decisions informed by
+        governing compliance standards, and a design pattern that treats autonomy as a configurable
+        property rather than a permanent architectural choice.
+      </p>
 
-<div class="hero-badges">
+      <div class="hero-badges">
         <span class="chip hot">● Active research</span>
         <span class="chip">📅 First published: February 2026</span>
         <a class="btn primary" href="#framework">Read the framework</a>
         <a class="btn ghost" href="index.html">← Main profile</a>
-    </div>
+      </div>
     </div>
 
     <div class="container">
 
-    <div style="padding:10px 14px;margin-bottom:12px;background:#eef2f7;border-radius:14px;border:1px solid #d8dfe8;">
-    <p class="muted" style="font-size:0.93em;line-height:1.6;margin-bottom:6px;"><strong style="color:#0b1220;">Target Audience:</strong> People designing, building, or governing AI-enabled enterprise systems.</p>
-    <p class="muted" style="font-size:0.93em;line-height:1.6;"><strong style="color:#0b1220;">Purpose:</strong> Most AI frameworks assume you already know where decisions live. System Decision Mapping helps you find them first.</p>
-    </div>
+      <!-- TARGET AUDIENCE BOX: updated language -->
+      <div style="padding:10px 14px;margin-bottom:12px;background:#eef2f7;border-radius:14px;border:1px solid #d8dfe8;">
+        <p class="muted" style="font-size:0.93em;line-height:1.6;margin-bottom:6px;"><strong style="color:#0b1220;">Target Audience:</strong> People designing, building, or governing AI-enabled enterprise systems in regulated environments.</p>
+        <p class="muted" style="font-size:0.93em;line-height:1.6;"><strong style="color:#0b1220;">The problem this solves:</strong> Enterprises can't justify expanding AI autonomy over time because no one has inventoried which decisions are constrained by regulation, which are eligible for AI ownership, and how those boundaries shift as model capabilities improve. This is that inventory, plus a design pattern for making the boundaries configurable.</p>
+      </div>
 
       <section class="card" id="framework">
-        <h3>What This Is — and What It Isn't</h3>
-        <p class="muted lead">A scaffold, not a solution</p>
-        <p class="muted" style="margin-top:10px;line-height:1.7;">When I started analyzing enterprise codebases for AI decision points, the first problem was just knowing what to look for. The nine questions here are what emerged from that process. They're not exhaustive—but they gave me a place to start, and that turned out to be the hard part.</p>
-        <p class="muted" style="margin-top:12px;font-style:italic;line-height:1.6;">If you're familiar with governance frameworks like NIST AI RMF: this work doesn't replace them — it starts where they stop.</p>
+        <!-- LANGUAGE UPDATE: "What This Is" — new framing from Yuri conversation -->
+        <h3>What This Is</h3>
+        <p class="muted lead">A staircase, not a guardrail</p>
+        <p class="muted" style="margin-top:10px;line-height:1.7;">
+          Most AI governance work asks: <em>"Should AI do this?"</em>
+          System Decision Mapping asks: <em>"Which decisions does this system actually make,
+          which ones are structurally eligible for AI ownership today, and how does that
+          change as models improve?"</em>
+        </p>
+        <p class="muted" style="margin-top:12px;line-height:1.7;">
+          That inversion matters. Governance without a decision inventory is policy theater.
+          Governance with one becomes evidence — the kind regulators can evaluate, auditors can
+          review, and architects can act on.
+        </p>
+        <p class="muted" style="margin-top:12px;font-style:italic;line-height:1.6;">
+          If you're familiar with governance frameworks like NIST AI RMF: this work doesn't
+          replace them — it starts where they stop.
+        </p>
         <div class="rows" style="margin-top:14px;">
-          <div class="row"><div class="icon">✗</div><div><b>What it is not</b><span> — AI managing master data stores (MDM). That space is mature and well-solved.</span></div></div>
-          <div class="row"><div class="icon">✓</div><div><b>What it is</b><span> — A structured way to reason about where AI autonomy is safe, earnable, or prohibited in a given enterprise system.</span></div></div>
+          <div class="row"><div class="icon">✗</div><div><b>What it is not</b><span> — A framework for preventing AI from acting. Not a risk checklist. Not a maturity model.</span></div></div>
+          <div class="row"><div class="icon">✓</div><div><b>What it is</b><span> — A structured method for identifying which decisions are AI-eligible today, which can earn autonomy over time, and how to make those boundaries explicit, reviewable, and upgradeable.</span></div></div>
         </div>
         <div class="pillar-grid">
-          <div class="pillar"><div class="num">01</div><b>Classify Decision Points</b><p>Which decisions belong to AI? Which require human judgment? System Decision Mapping gives AI a structured method to classify them—consistently, across any domain.</p></div>
-          <div class="pillar"><div class="num">02</div><b>Reason About Autonomy</b><p>Master data dependency, regulatory exposure, reversibility—the framework surfaces the signals that determine where autonomy is safe and where it isn't.</p></div>
-          <div class="pillar"><div class="num">03</div><b>Define Oversight &amp; Constraint</b><p>Where humans must be in the loop, how is that seam designed into the architecture? System Decision Mapping structures those answers into deliberate decisions.</p></div>
+          <div class="pillar"><div class="num">01</div><b>Inventory the Decision Surface</b><p>Before you can govern AI decisions, you have to know where they are. System Decision Mapping extracts them from real codebases — consistently, before reading a line of business logic.</p></div>
+          <div class="pillar"><div class="num">02</div><b>Classify Autonomy Eligibility</b><p>Nine evaluation questions surface which decisions are safe to automate today, which require human approval, and which are regulatory hard floors. The governing standard predicts the structure.</p></div>
+          <div class="pillar"><div class="num">03</div><b>Make Autonomy Configurable</b><p>The output is not a report — it's a design pattern. Decisions become configurable units. Autonomy is a property that can be upgraded with evidence, not a one-time architectural commitment.</p></div>
+        </div>
+      </section>
+
+      <!-- LANGUAGE UPDATE: "Two Core Capabilities" — new section, from Yuri conversation -->
+      <section class="card" id="two-capabilities">
+        <h3>Two Core Capabilities</h3>
+        <p class="muted" style="line-height:1.6;">
+          System Decision Mapping delivers two things that are distinct but share the same foundation.
+        </p>
+        <div class="rows" style="margin-top:14px;">
+          <div class="row">
+            <div class="icon" style="font-size:0.75em;font-weight:900;">①</div>
+            <div>
+              <b>Capability-delta measurement on stable problem statements</b>
+              <span style="display:block;margin-top:4px;color:var(--muted);line-height:1.6;">
+                Decision surfaces in enterprise systems are structurally stable — they persist across refactors, vendor swaps, and model upgrades. AI capability is the fast-moving layer. This capability measures the delta: for each decision problem, how does the solution path change as models improve? Which steps collapse? Which human scaffolding is no longer needed? The answer tells you where to target AI enablement next — based on evidence, not intuition.
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="icon" style="font-size:0.75em;font-weight:900;">②</div>
+            <div>
+              <b>AI-first decision design pattern — autonomy as configuration, not commitment</b>
+              <span style="display:block;margin-top:4px;color:var(--muted);line-height:1.6;">
+                Each decision point is isolated, named, and tooled. Autonomy tier (Immediate / Earned / Supervised / Aspirational) is a configurable property, not a hardcoded assumption. Evidence gates upgrades. Rollback is structural — a config change, not an emergency. And every human or supervised decision trains the system as you work, so conservative configurations aren't dead ends — they're data collection.
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- LANGUAGE UPDATE: The golden nugget box -->
+        <div style="margin-top:16px;padding:16px 18px;background:linear-gradient(135deg,rgba(6,182,212,0.08),rgba(124,58,237,0.06));border:1px solid rgba(6,182,212,0.22);border-radius:12px;">
+          <div style="font-size:0.72em;font-weight:900;color:#0f172a;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">The Core Insight</div>
+          <p style="font-size:0.95em;line-height:1.7;color:#0b1220;">
+            <strong>Decisions are stable. AI capability changes quickly.</strong>
+            The missing piece is a measurement that lets organizations justify upgrading AI autonomy over time
+            without renegotiating regulatory accountability. That's what this produces.
+          </p>
+          <p style="font-size:0.88em;line-height:1.6;color:var(--muted);margin-top:8px;">
+            The capability is not the bottleneck. The justification is. Regulators don't block AI because
+            they distrust the technology — they block it because there's no documented, auditable basis for
+            the autonomy decision. This system produces that documentation.
+          </p>
         </div>
       </section>
 
@@ -245,7 +325,7 @@ color:#94a3b8;display:block;max-width:780px;">
           <div class="row"><div class="icon" style="font-size:0.8em;font-weight:900;">Q3</div><div><b>Regulatory Test</b><span> — Does law or regulation require a named human in this decision? This is the only permanent wall. Everything else is earnable.</span></div></div>
           <div class="row"><div class="icon" style="font-size:0.8em;font-weight:900;">Q4</div><div><b>Volume / Pattern Test</b><span> — Is this repeated logic with consistent inputs? High volume + consistency = prime AI candidate.</span></div></div>
           <div class="row"><div class="icon" style="font-size:0.8em;font-weight:900;">Q5</div><div><b>Override Signal Test</b><span> — Is there an "Override" in the command name? That's historical record of where humans didn't trust automation. Pay attention.</span></div></div>
-          <div class="row"><div class="icon" style="font-size:0.8em;font-weight:900;">Q6</div><div><b>Discretion Test</b><span> — Does this require unmeasured factors—empathy, relationship context, judgment that defies codification? Lowest AI confidence territory.</span></div></div>
+          <div class="row"><div class="icon" style="font-size:0.8em;font-weight:900;">Q6</div><div><b>Discretion Test</b><span> — Does this require unmeasured factors — empathy, relationship context, judgment that defies codification? Lowest AI confidence territory.</span></div></div>
           <div class="row"><div class="icon" style="font-size:0.8em;font-weight:900;">Q7</div><div><b>Anomaly Test</b><span> — Is this detecting a pattern vs. responding to one? Detection is AI-suited. Response to edge-case anomaly requires more caution.</span></div></div>
           <div class="row"><div class="icon" style="font-size:0.8em;font-weight:900;">Q8</div><div><b>Cascade Test</b><span> — What is the downstream impact scope? A decision that triggers a chain of other decisions needs proportionally higher confidence before autonomous execution.</span></div></div>
           <div class="row"><div class="icon" style="font-size:0.8em;font-weight:900;">Q9</div><div><b>Feedback Velocity Test</b><span> — How fast does feedback become knowable? Fast feedback = faster confidence curve. Velocity determines the shape of the learning curve, not the destination.</span></div></div>
@@ -262,12 +342,47 @@ color:#94a3b8;display:block;max-width:780px;">
       </section>
 
       <section class="card" id="confidence">
-        <h3>Confidence-Based Handoff Model</h3>
-        <p class="muted" style="line-height:1.6;">Every command gets an AI model prediction before execution. Classification is confidence-based with a learning loop. Human becomes cosigner, not sole decision-maker.</p>
+        <!-- LANGUAGE UPDATE: Four tiers, not three — matches actual framework -->
+        <h3>Four Autonomy Tiers</h3>
+        <p class="muted" style="line-height:1.6;">
+          Each decision point in the inventory carries an autonomy tier — a starting position, not a permanent label.
+          The tier is a configurable property. Upgrades require evidence. Rollback is structural.
+        </p>
         <div class="tier-grid">
-          <div class="tier tier-1"><b>✓ Immediate (AI Owns)</b><p>Safe to automate from day one. No known regulatory flag. Fast feedback. Fully reversible.</p></div>
-          <div class="tier tier-2"><b>~ Earned (Collaborative)</b><p>AI recommends after demonstrated confidence across enterprise decision points. Human approves.</p></div>
-          <div class="tier tier-3"><b>⚠ Human Owns</b><p>Regulatory floor, deep discretion, or meaningful downstream cascade. AI provides recommendation only. Human remains accountable signatory.</p></div>
+          <div class="tier tier-1">
+            <b>✓ Immediate</b>
+            <p>AI owns from day one. Safe to automate without a track record. No regulatory flag. Fast feedback. Fully reversible.</p>
+          </div>
+          <div class="tier tier-2">
+            <b>~ Earned</b>
+            <p>AI owns after demonstrated performance. Starts supervised, graduates when confidence is established across a meaningful sample.</p>
+          </div>
+          <div class="tier tier-3">
+            <b>⚑ Supervised</b>
+            <p>AI recommends, human approves. Tier for decisions with real downstream consequence or precursor to irreversible action. Human is cosigner, not sole decision-maker.</p>
+          </div>
+          <div class="tier tier-4">
+            <b>⚠ Aspirational</b>
+            <p>Human owns, AI advises only. Regulatory floor, irreversible money movement, or deep discretion. AI cannot trigger execution — it prepares the summary and surfaces the impact. Human decides.</p>
+          </div>
+        </div>
+        <!-- LANGUAGE UPDATE: Added the continuous training note Yuri almost missed -->
+        <div style="margin-top:14px;padding:14px 16px;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;">
+          <div style="font-size:0.72em;font-weight:900;color:#0369a1;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Continuous Training — Built In</div>
+          <p style="font-size:0.88em;line-height:1.65;color:#0b1220;">
+            Every human or Supervised decision is a labeled example. The system trains as you work —
+            not as a separate project. Conservative tier assignments aren't holding patterns;
+            they're structured data collection. The path from Supervised to Earned is paved by
+            the decisions already being made.
+          </p>
+          <p style="font-size:0.88em;line-height:1.65;color:#0b1220;margin-top:8px;">
+            For Supervised and Aspirational decisions, the AI classification is deliberately withheld
+            until after the human has made their decision. This prevents decision complacency —
+            the well-documented tendency for humans to anchor on and defer to an AI recommendation
+            even when their independent judgment would differ. The result is a cleaner training signal
+            and a more defensible audit trail: human decisions are genuinely independent, and
+            divergence from the AI is measurable rather than suppressed.
+          </p>
         </div>
       </section>
 
@@ -276,16 +391,17 @@ color:#94a3b8;display:block;max-width:780px;">
         <p class="muted" style="line-height:1.6;">Autonomy is not a one-time classification. It is earned, monitored, and can be revoked. Feedback velocity determines how fast that earning can happen — and how fast revocation must happen when things go wrong.</p>
         <div class="rows" style="margin-top:14px;">
           <div class="row"><div class="icon">⏱</div><div><b>Feedback Velocity</b><span> — How fast outcomes become observable. Loan repayment feedback arrives in days. Healthcare ICD-10 coding drift takes months to surface in audit cycles. Same framework architecture. Completely different confidence curve shapes. Patience is an architectural variable, not a policy preference.</span></div></div>
-          <div class="row"><div class="icon">↺</div><div><b>Learning Loops</b><span> — Confidence adjusts over time as outcomes accumulate. A decision point that starts in "Earned / Collaborative" can graduate to "AI Owns" — or get demoted to "Human Owns" — based on observed outcomes. The tier assignment is a starting point, not a permanent label.</span></div></div>
+          <div class="row"><div class="icon">↺</div><div><b>Learning Loops</b><span> — Confidence adjusts over time as outcomes accumulate. A decision point that starts in Earned can graduate to Immediate — or get demoted to Supervised — based on observed outcomes. The tier assignment is a starting point, not a permanent label.</span></div></div>
           <div class="row"><div class="icon">⚠</div><div><b>Drift Detection</b><span> — When AI behavior diverges from expected patterns over a large sample, that is a T2 Drift Correction event. The system flags it; a human corrects it. Detection is AI-suited. The correction decision is not.</span></div></div>
           <div class="row"><div class="icon">⛔</div><div><b>Rollback & Containment</b><span> — When confidence drops below threshold, autonomy is automatically constrained. Execution reverts to the next lower confidence tier until confidence is re-established. The tier model is the enforcement mechanism, not a separate control layer.</span></div></div>
-          <div class="row"><div class="icon">🔄</div><div><b>Model Upgrade Cadence</b><span> — AI model capabilities are improving roughly every 3–4 months. Autonomy tier classifications made at implementation are not permanent. A structured re-evaluation against the decision inventory is warranted on each model upgrade cycle. This is planned research.</span></div></div>
+          <!-- LANGUAGE UPDATE: Model upgrade cadence — sharpened to match justification engine framing -->
+          <div class="row"><div class="icon">🔄</div><div><b>Model Upgrade Cadence</b><span> — AI model capabilities are improving roughly every 3–4 months. Autonomy tier assignments made at implementation are not permanent — and that's the point. A structured re-evaluation against the decision inventory, run on each model upgrade cycle, is how organizations justify moving decisions up the tier ladder. This is planned research.</span></div></div>
         </div>
       </section>
 
       <section class="card" id="nist">
         <h3>NIST AI RMF → System Decision Mapping (Operational Use)</h3>
-        <p class="muted" style="line-height:1.6;">This mapping shows how System Decision Mapping can be used as structured input—by humans or AI—to identify the decision landscape implicit in the NIST AI Risk Management Framework, providing a concrete place to start without defining policy or permissions.</p>
+        <p class="muted" style="line-height:1.6;">This mapping shows how System Decision Mapping can be used as structured input — by humans or AI — to identify the decision landscape implicit in the NIST AI Risk Management Framework, providing a concrete place to start without defining policy or permissions.</p>
         <div style="overflow-x:auto;margin-top:16px;">
           <table style="width:100%;border-collapse:collapse;font-size:0.88em;">
             <thead>
@@ -322,8 +438,8 @@ color:#94a3b8;display:block;max-width:780px;">
                   <span style="background:#f3e8ff;color:#6b21a8;border-radius:999px;padding:3px 10px;font-size:0.82em;font-weight:800;display:inline-block;margin-bottom:4px;">GOVERN</span><br>
                   <span style="background:#fef3c7;color:#92400e;border-radius:999px;padding:3px 10px;font-size:0.82em;font-weight:800;display:inline-block;">MANAGE</span>
                 </td>
-                <td style="padding:12px;font-weight:800;color:#0b1220;">Confidence-Based Handoff Model</td>
-                <td style="padding:12px;color:var(--muted);line-height:1.5;">Defines when AI may act, when it must defer, and when humans retain ownership — with clear thresholds</td>
+                <td style="padding:12px;font-weight:800;color:#0b1220;">Four-Tier Autonomy Model</td>
+                <td style="padding:12px;color:var(--muted);line-height:1.5;">Defines when AI may act, when it must defer, and when humans retain ownership — with clear thresholds and upgrade criteria</td>
               </tr>
               <tr style="border-bottom:1px solid var(--line);background:#fafbfc;">
                 <td style="padding:12px;font-weight:800;color:#0b1220;">What happens when confidence is unclear?</td>
@@ -333,7 +449,7 @@ color:#94a3b8;display:block;max-width:780px;">
                   <span style="background:#fef3c7;color:#92400e;border-radius:999px;padding:3px 10px;font-size:0.82em;font-weight:800;display:inline-block;">MANAGE</span>
                 </td>
                 <td style="padding:12px;font-weight:800;color:#0b1220;">Low-AI-Confidence Defaults</td>
-                <td style="padding:12px;color:var(--muted);line-height:1.5;">Applies a simple rule: if confidence can't be established, the decision remains human-owned</td>
+                <td style="padding:12px;color:var(--muted);line-height:1.5;">Applies a simple rule: if confidence can't be established, the decision remains human-owned until evidence supports an upgrade</td>
               </tr>
               <tr style="border-bottom:1px solid var(--line);">
                 <td style="padding:12px;font-weight:800;color:#0b1220;">How do we monitor and respond to issues over time?</td>
@@ -350,11 +466,15 @@ color:#94a3b8;display:block;max-width:780px;">
         </div>
         <div style="margin-top:16px;padding:16px 18px;background:#fffbeb;border:1px solid #fbbf24;border-radius:12px;">
           <div style="font-size:0.72em;font-weight:900;color:#92400e;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">The Key Point</div>
-          <p style="font-size:0.92em;line-height:1.65;color:#0b1220;">This mapping demonstrates where governance, measurement, autonomy decisions, and monitoring are explicitly implemented — without prescribing or permitting autonomy by default. I independently derived an operational form of something that previously existed only as principles.</p>
+          <!-- LANGUAGE UPDATE: Sharpened to match justification engine framing -->
+          <p style="font-size:0.92em;line-height:1.65;color:#0b1220;">
+            NIST tells you governance is required. This tells you where it lives in the code.
+            That's the gap — and it's where AI adoption either stalls in policy documents
+            or moves forward with an auditable basis.
+          </p>
         </div>
       </section>
 
-      <!-- VALIDATION — THREE CHANGES HERE -->
       <section class="card" id="validation">
         <h3>Cross-Domain Validation</h3>
         <p class="muted" style="line-height:1.6;">Predictions derived from standards documentation — SWIFT CBPR+, ISO 20022, BMC Medical Informatics (2020), CMS ICD-10 guidelines — then tested against real codebase analysis. The governing standard predicted the decision structure before the code was read.</p>
@@ -418,11 +538,13 @@ color:#94a3b8;display:block;max-width:780px;">
         </div>
 
         <div class="rows" style="margin-top:18px;">
-          <div class="status-row"><span class="badge badge-green">Done</span><div class="txt"><b>Framework defined</b> — Nine questions, four decision types, confidence tier model, feedback velocity as architectural variable.</div></div>
+          <div class="status-row"><span class="badge badge-green">Done</span><div class="txt"><b>Framework defined</b> — Nine questions, four decision types, four autonomy tiers, feedback velocity as architectural variable.</div></div>
           <div class="status-row"><span class="badge badge-green">Done</span><div class="txt"><b>Banking and healthcare validated</b> — 682 decision points. Predictions sourced from SWIFT CBPR+ and ICD-10 documentation independently. All tier predictions within 5% of actuals.</div></div>
           <div class="status-row"><span class="badge badge-green">Done</span><div class="txt"><b>Reasoning baseline established</b> — 416 Fineract decision points classified by AI reasoning (not heuristics) on February 21, 2026. 70.2% agreement with heuristic classifier. Baseline stored for next model version comparison.</div></div>
+          <!-- LANGUAGE UPDATE: Fineract rebuild added to roadmap -->
+          <div class="status-row"><span class="badge badge-blue">In progress</span><div class="txt"><b>Fineract AI-first reference implementation</b> — Rebuilding the loan origination workflow with explicit tier boundaries as code constructs. Demonstrates what autonomy configuration looks like in practice and surfaces framework gaps in real time.</div></div>
           <div class="status-row"><span class="badge badge-purple">In research</span><div class="txt"><b>Supply chain &amp; IAM methodology</b> — OFBiz extracted (3,493 business decisions). Voluntary-standard and policy-governed decision architectures require separate evaluation methodology. Planned extension.</div></div>
-          <div class="status-row"><span class="badge badge-blue">Planned</span><div class="txt"><b>Model upgrade assessment protocol</b> — Structured methodology for re-evaluating autonomy tier classifications when AI model versions change. AI capabilities are improving every 3–4 months; tier classifications made at implementation are not permanent.</div></div>
+          <div class="status-row"><span class="badge badge-blue">Planned</span><div class="txt"><b>Model upgrade assessment protocol</b> — Structured methodology for re-evaluating autonomy tier classifications when AI model versions change. AI capabilities are improving every 3–4 months; tier classifications made at implementation are not permanent. This is the core justification mechanism.</div></div>
           <div class="status-row"><span class="badge badge-blue">Planned</span><div class="txt"><b>Fourth domain validation</b> — Testing framework against a codebase with mandatory external standard outside banking and healthcare.</div></div>
         </div>
       </section>
@@ -434,13 +556,15 @@ color:#94a3b8;display:block;max-width:780px;">
           <div class="row"><div class="icon">🔍</div><div><b>What it does</b><span> — Scans Java codebases and XML service definitions for decision point patterns. Applies the nine questions as a scoring algorithm. Outputs structured JSON with confidence tier classifications.</span></div></div>
           <div class="row"><div class="icon">🏗</div><div><b>Architecture patterns supported</b><span> — Annotation-driven command patterns (Fineract), privilege-based service authorization (OpenMRS), XML servicedef files (OFBiz). Three different patterns, one extractor.</span></div></div>
           <div class="row"><div class="icon">📤</div><div><b>Output</b><span> — Decision point inventory with domain classification, autonomy tier, feedback velocity rating, and regulatory floor flags. Human-readable and machine-readable.</span></div></div>
-          <div class="row"><div class="icon">🧪</div><div><b>Test suite</b><span> — A reasoning-based classifier runs the full decision inventory against the current AI model version. Output is a dated, model-stamped baseline file. Designed to be re-run on each model upgrade to measure capability drift against real enterprise decision points.</span></div></div>
+          <!-- LANGUAGE UPDATE: Test suite — problem statement framing added -->
+          <div class="row"><div class="icon">🧪</div><div><b>Test suite &amp; capability-delta measurement</b><span> — A curated inventory of structured decision problems, each with a model-stamped baseline classification. Re-run on each model upgrade to measure which decisions change tier and why. This is how autonomy upgrades get justified over time — not by trusting that the new model is better, but by measuring where it actually is.</span></div></div>
         </div>
       </section>
 
       <div class="collab">
         <h3>Feedback Welcome</h3>
-        <p>System Decision Mapping documents a recurring pattern observed across the production systems analyzed so far. The goal is to make those patterns explicit so they can be tested, challenged, and improved. If you apply this to your own systems, I'd love to compare notes—especially on failure cases, edge conditions, and domains where the enforcement mechanism distinction holds or breaks.</p>
+        <!-- LANGUAGE UPDATE: Feedback section sharpened -->
+        <p>System Decision Mapping documents a recurring pattern observed across production systems in regulated environments. The most useful feedback is failure cases: where the enforcement mechanism distinction breaks, where the nine questions give ambiguous results, and where the tier model doesn't map cleanly to a real decision. If you've tried to apply this to your own systems, I'd like to compare notes.</p>
         <div class="proof-actions">
           <a class="btn-dark" href="mailto:system.cartographer@gmail.com">✉️ Send Feedback</a>
           <a class="btn-outline" href="https://www.linkedin.com/in/debcapadona/" target="_blank">💼 LinkedIn</a>
